@@ -2,7 +2,6 @@ FROM php:7.4-fpm-alpine
 
 RUN apk add --update --no-cache libgd libpng-dev libjpeg-turbo-dev freetype-dev libxml2-dev
 RUN docker-php-ext-install -j$(nproc) gd 
-
 RUN docker-php-ext-install xml mysqli bcmath opcache xml pdo_mysql 
 
 #RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu

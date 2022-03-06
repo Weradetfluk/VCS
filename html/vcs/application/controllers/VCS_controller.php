@@ -63,13 +63,17 @@ class VCS_controller extends CI_Controller {
 		$this->load->model('/M_vcs_user', 'vuse');
 		$this->vuse->use_usename = $this->input->post('username');
 		$this->vuse->use_password = $this->input->post('password');
-		$check_login = $this->vuse->get_by_username_and_password()->row;
-		$check_login = 'sss';
-		if($check_login){
-			$this->output('welcome_message');
-		}else{
-			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
-			$this->output('v_login', $data);
-		}
+		$check_login = $this->vuse->get_by_username_and_password();
+
+		var_dump($check_login); 
+		// if($check_login){
+		// 	$this->output('welcome_message');
+		// }else{
+		// 	$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
+		// 	$this->output('v_login', $data);
+		// }
+
+		// echo 	$this->vuse->use_usename;
+		// echo 	$this->vuse->use_password;
 	}
 }

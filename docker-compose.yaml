@@ -14,7 +14,7 @@ services:
 
   php:
     container_name: vcs_php
-    image: php:7.4-fpm-alpine
+    image: peerasakp/php7-4
     restart: unless-stopped
     volumes:
       - ./html/:/var/www/html

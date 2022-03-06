@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['VCS'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'db',
 	'username' => 'team2',
 	'password' => 'team2@2021',
 	'database' => 'vcs_db',
