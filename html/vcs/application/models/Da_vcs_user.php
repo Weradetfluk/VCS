@@ -13,6 +13,7 @@ class Da_vcs_user extends VCS_model{
 	public $use_name;
     public $use_username;
     public $use_password;
+    public $use_status;
     public $use_point;
 
     /*
