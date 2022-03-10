@@ -5,7 +5,7 @@
                 <img src="<?= base_url().'/images/image_vote.jpg'?>" class="card-img-top">
                 <div class="card-body">
                     <center><?php echo $arr_vote[$i]->vot_name?></center><br>
-                    <a href="<?= base_url().'/User/show_choice_vote_list/'.$arr_vote[$i]->vot_id;?>" class="btn btn-info" style="width: 100%;">เลือก</a>
+                    <a href="<?= base_url().'User/show_choice_vote_list/'.$arr_vote[$i]->vot_id;?>" class="btn btn-info" style="width: 100%;">เลือก</a>
                 </div>
             </div>
         <?php }?>

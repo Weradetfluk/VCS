@@ -2,7 +2,7 @@
     <div class="row">
         <?php for($i = 0; $i < count($arr_choice_vote); $i++){?>
             <div class="card col-lg-3 col-sm-6" style="margin:20px 30px;">
-                <img src="<?= base_url().'/images/image_vote.jpg'?>" class="card-img-top">
+                <img src="<?= base_url().'images/image_vote.jpg'?>" class="card-img-top">
                 <div class="card-body">
                     <center><?= $arr_choice_vote[$i]->cho_name?></center><br>
                     <button class="btn btn-info" style="width: 100%;" onclick="vote_modal(<?= $arr_choice_vote[$i]->cho_id?>, '<?= $arr_choice_vote[$i]->cho_name?>')">โหวต</button>
@@ -16,7 +16,7 @@
 
 <!-- vote modal -->
 <div class="modal" tabindex="-1" id="modal_vote">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="name_vote"></h5>
@@ -71,29 +71,21 @@
     * @Update Date -
     */
     function vote_ajax(id, score){
-      console.log('ajax');
-      $.ajax({
-        type: "POST",
-        data: {
-          cho_id: id, 
-          cho_score: $('#score_'+id),
-          score_vote: score
-        },
-        url: '<?= base_url() . '/User/vote_ajax/' ?>',
-        success: function() {
-          // swal({
-          //     title: "ลบสถานที่",
-          //     text: "คุณได้ทำการลบสถานที่เสร็จสิ้น",
-          //     type: "success"
-          //   },
-          //   function() {
-          //     location.reload();
-          //   })
+      var cho_score = $('#score_'+id).val();
+      console.log(cho_score + ':' + id + ':' + score);
 
-        },
-        error: function() {
-          alert('ajax error working');
-        }
+      $.ajax({
+          url: "<?php echo base_url() . "User/vote_ajax/"?>",
+          method: "POST",
+          dataType: "JSON",
+          data: {
+            cho_id: id,
+            cho_score: cho_score,
+            score_vote: score,
+          },
+          success: function(){
+            location.reload();
+          }
       });
     }
 </script>

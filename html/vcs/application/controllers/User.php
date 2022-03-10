@@ -59,7 +59,8 @@ class User extends VCS_controller {
 	*/ 
     public function vote_ajax(){
 		$this->load->model('M_vcs_choice_vote', 'vcho');
-		$score_sum = $this->input->post('score_vote') + $this->input->post('score_vote');
+		$this->load->model('M_vcs_user', 'usr');
+		$score_sum = $this->input->post('score_vote') + $this->input->post('cho_score');
 		$this->vcho->cho_score = $score_sum;
 		$this->vcho->cho_id = $this->input->post('cho_id');
         $this->vcho->update_score_by_cho_id();
