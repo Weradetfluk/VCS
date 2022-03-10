@@ -32,4 +32,36 @@ class User extends VCS_controller {
         // print_r($data['arr_vote']);
         // echo '</pre>';
     }
+
+	/*
+	* show_choice_vote_list
+	* show list choice vote 
+	* @input -
+	* @output -
+	* @author suwapat saowarod 62160340
+	* @Create Date 2565-03-06
+	*/ 
+    public function show_choice_vote_list($vot_id){
+        $this->load->model('M_vcs_choice_vote', 'vcho');
+		$this->vcho->cho_vot_id = $vot_id;
+        $data['arr_choice_vote'] = $this->vcho->get_choice_vote_by_vot_id();
+        $this->output('v_list_choice_vote', $data);
+
+    }
+
+	/*
+	* vote_ajax
+	* vote save in database
+	* @input cho_id, score_vote
+	* @output -
+	* @author suwapat saowarod 62160340
+	* @Create Date 2565-03-10
+	*/ 
+    public function vote_ajax(){
+		$this->load->model('M_vcs_choice_vote', 'vcho');
+		$score_sum = $this->input->post('score_vote') + $this->input->post('score_vote');
+		$this->vcho->cho_score = $score_sum;
+		$this->vcho->cho_id = $this->input->post('cho_id');
+        $this->vcho->update_score_by_cho_id();
+    }
 }
