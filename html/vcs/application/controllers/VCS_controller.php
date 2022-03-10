@@ -75,11 +75,11 @@ class VCS_controller extends CI_Controller {
 		$this->vuse->use_password = $this->input->post('password');
 		$check_login = $this->vuse->get_by_username_and_password();
 
-		if($check_login){
-			redirect('User/show_vote_list');
-		}else{
-			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
-			$this->output('v_login', $data);
-		}
+		// if($check_login){
+		// 	redirect('User/show_vote_list');
+		// }else{
+		// 	$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
+		// 	$this->output('v_login', $data);
+		// }
 	}
 }
