@@ -6,9 +6,10 @@
 * @Create Date 2565-03-06
 */
 defined('BASEPATH') or exit('No direct script access allowed');
-include_once dirname(__FILE__) ."/Da_vcs_user.php";
-class M_vcs_user extends Da_vcs_user{
-    
+include_once dirname(__FILE__) . "/Da_vcs_user.php";
+class M_vcs_user extends Da_vcs_user
+{
+
     /*
     * get_by_username_and_password
     * get by username and password
@@ -30,5 +31,21 @@ class M_vcs_user extends Da_vcs_user{
         } else {
             return false;
         }
+    }
+
+    /*
+    * get_user_all
+    * get user all
+    * @input -
+    * @output -
+    * @author naaka punparich 62160082
+    * @Create Date 2565-03-06
+    * @Update Date -
+    */
+    function get_user_all()
+    {
+        $sql = "SELECT * from vcs_user";
+        $query = $this->db->query($sql);
+        return $query->result();
     }
 }

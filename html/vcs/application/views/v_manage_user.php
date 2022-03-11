@@ -60,26 +60,26 @@
         <!-- ขีดเส้นใต้ -->
 
 
-        <?php foreach (range(0, 9) as $i) : ?>
+        <?php for ($i = 0; $i < count($arr_user); $i++) { ?>
 
             <div class="row py-2" style="text-align: center">
                 <div class="col">
-                    <p>มกุล <?php echo $i ?></p>
+                    <p><?php echo $arr_user[$i]->use_name ?></p>
                 </div>
                 <!-- ชื่อมกุล -->
 
                 <div class="col">
-                    <p>cluster<?php echo $i ?></p>
+                    <p><?php echo $arr_user[$i]->use_username ?></p>
                 </div>
                 <!-- ชื่อผู้ใช้ -->
 
                 <div class="col">
-                    <p>cluster<?php echo $i ?>@2022</p>
+                    <p><?php echo $arr_user[$i]->use_password ?></p>
                 </div>
                 <!-- รหัสผ่าน -->
 
                 <div class="col">
-                    <p><?php echo $i += 100 ?></p>
+                    <p><?php echo $arr_user[$i]->use_point ?></p>
                 </div>
                 <!-- คะแนน -->
 
@@ -90,8 +90,8 @@
                 <!-- ปุ่มจัดการ -->
             </div>
 
-        <?php endforeach; ?>
-        <!-- Foreach Loop ข้อมูลในตาราง -->
+        <?php } ?>
+        <!-- For Loop ข้อมูลในตาราง -->
 
         <div class="row py-4" style="text-align: center">
 
@@ -102,7 +102,7 @@
             <!-- เว้นวรรค -->
 
             <div class="col">
-                <button type="button" class="btn btn-success" style="width: 57%" data-toggle="modal" data-target="#myModal">เพิ่ม</button>
+                <button type="button" class="btn btn-success" style="width: 112px;" data-toggle="modal" data-target="#myModal">เพิ่ม</button>
             </div>
             <!-- ปุ่มเพิ่ม -->
 
@@ -124,41 +124,44 @@
             </div>
             <!-- ส่วนหัว -->
 
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row py-2">
-                        <label class="low-lebel">ชื่อมกุล</label>
-                        <input type="text" class="form-control" id="cluster" placeholder="ใส่ชื่อมกุล">
-                    </div>
-                    <!-- ชื่อมกุล -->
+            <form method='POST' action='<?php echo base_url('VCS_controller/add_manage_user') ?>'>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row py-2">
+                            <label class="low-lebel">ชื่อมกุล</label>
+                            <input type="text" class="form-control" id="use_name" name="use_name" placeholder="ใส่ชื่อมกุล">
+                        </div>
+                        <!-- ชื่อมกุล -->
 
-                    <div class="row py-2">
-                        <label class="low-lebel">ชื่อผู้ใช้</label>
-                        <input type="text" class="form-control" id="cluster" placeholder="ใส่ชื่อผู้ใช้">
-                    </div>
-                    <!-- ชื่อผู้ใช้ -->
+                        <div class="row py-2">
+                            <label class="low-lebel">ชื่อผู้ใช้</label>
+                            <input type="text" class="form-control" id="use_username" name="use_username" placeholder="ใส่ชื่อผู้ใช้">
+                        </div>
+                        <!-- ชื่อผู้ใช้ -->
 
-                    <div class="row py-2">
-                        <label class="low-lebel">รหัสผ่าน</label>
-                        <input type="text" class="form-control" id="cluster" placeholder="ใส่รหัสผ่าน">
-                    </div>
-                    <!-- รหัสผ่าน -->
+                        <div class="row py-2">
+                            <label class="low-lebel">รหัสผ่าน</label>
+                            <input type="text" class="form-control" id="use_password" name="use_password" placeholder="ใส่รหัสผ่าน">
+                        </div>
+                        <!-- รหัสผ่าน -->
 
-                    <div class="row py-2">
-                        <label class="low-lebel">คะแนน</label>
-                        <input type="text" class="form-control" id="cluster" placeholder="ใส่คะแนน">
-                    </div>
-                    <!-- คะแนน -->
+                        <div class="row py-2">
+                            <label class="low-lebel">คะแนน</label>
+                            <input type="text" class="form-control" id="use_point" name="use_point" placeholder="ใส่คะแนน">
+                        </div>
+                        <!-- คะแนน -->
 
+                    </div>
                 </div>
-            </div>
-            <!-- ส่วนตัว -->
+                <!-- ส่วนตัว -->
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">ยืนยัน</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-            </div>
-            <!-- ส่วนหาง -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">ยืนยัน</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                </div>
+                <!-- ส่วนหาง -->
+            </form>
+            <!-- Form -->
         </div>
     </div>
 </div>

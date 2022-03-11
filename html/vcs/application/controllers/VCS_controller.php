@@ -6,17 +6,18 @@
 * @output -
 * @author suwapat saowarod 62160340
 * @Create Date 2565-03-01
-*/ 
+*/
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class VCS_controller extends CI_Controller {
+class VCS_controller extends CI_Controller
+{
 
 	public function __construct()
-    {
-        parent::__construct();
-    }
-	
+	{
+		parent::__construct();
+	}
+
 	/*
 	* index
 	* 
@@ -24,7 +25,7 @@ class VCS_controller extends CI_Controller {
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-01
-	*/ 
+	*/
 	public function index()
 	{
 		$this->show_login_page();
@@ -37,7 +38,7 @@ class VCS_controller extends CI_Controller {
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-06
-	*/ 
+	*/
 	public function output($view, $data = NULL)
 	{
 		$this->load->view('v_header');
@@ -54,7 +55,7 @@ class VCS_controller extends CI_Controller {
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-01
-	*/ 
+	*/
 	public function show_login_page()
 	{
 		$this->output('v_login');
@@ -67,7 +68,7 @@ class VCS_controller extends CI_Controller {
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-06
-	*/ 
+	*/
 	public function login()
 	{
 		$this->load->model('/M_vcs_user', 'vuse');
@@ -75,9 +76,9 @@ class VCS_controller extends CI_Controller {
 		$this->vuse->use_password = $this->input->post('password');
 		$check_login = $this->vuse->get_by_username_and_password();
 
-		if($check_login){
+		if ($check_login) {
 			redirect('User/show_vote_list');
-		}else{
+		} else {
 			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
 			$this->output('v_login', $data);
 		}
@@ -90,9 +91,34 @@ class VCS_controller extends CI_Controller {
 	* @output -
 	* @author naaka punparich 62160082 & 
 	* @Create Date 2565-03-01
-	*/ 
+	*/
 	public function show_manage_user_page()
 	{
-		$this->output('v_manage_user');
+		$this->load->model('/M_vcs_user', 'vuse');
+		$data['arr_user'] = $this->vuse->get_user_all();
+		$this->output('v_manage_user', $data);
+	}
+
+	/*
+	* show_manage_user_page
+	* show manage user page 
+	* @input data
+	* @output -
+	* @author naaka punparich 62160082 
+	* @Create Date 2565-03-01
+	*/
+	public function add_manage_user()
+	{
+		$this->load->model('/Da_vcs_user', 'vuse');
+
+		$this->vuse->use_id = intval($this->input->post('use_id'));
+		$this->vuse->use_name = $this->input->post('use_name');
+		$this->vuse->use_username = $this->input->post('use_username');
+		$this->vuse->use_password = $this->input->post('use_password');
+		$this->vuse->use_status = 1;
+		$this->vuse->use_point = $this->input->post('use_point');
+
+		$this->vuse->add_user();
+		redirect('VCS_controller/show_manage_user_page');
 	}
 }
