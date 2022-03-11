@@ -21,7 +21,7 @@ class M_vcs_user extends Da_vcs_user
     */
     function get_by_username_and_password()
     {
-        $sql = "SELECT use_id from vcs_user
+        $sql = "SELECT use_id, use_name, use_status, use_point from vcs_user
                 WHERE use_username = ? AND use_password = ?";
         $query = $this->db->query($sql, array($this->use_username, $this->use_password));
         $query_row = $query->num_rows();

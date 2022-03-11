@@ -38,4 +38,20 @@ class Da_vcs_user extends VCS_model
         $sql = "INSERT INTO vcs_user(use_id, use_name, use_username, use_password, use_status, use_point) VALUES(?, ?, ?, ?, ?, ?)";
         $this->db->query($sql, array($this->use_id, $this->use_name, $this->use_username, $this->use_password, $this->use_status, $this->use_point));
     }
+
+    /*
+    * update_point_by_use_id
+    * update score by cho id
+    * @input use_point, use_id
+    * @output -
+    * @author Suwapat Saowarod 62160340
+    * @Create Date 2565-03-11
+    * @Update Date -
+    */
+    function update_point_by_use_id()
+    {
+        $sql = "UPDATE `vcs_user` SET `use_point`= ?
+                WHERE `use_id` = ?";
+        $this->db->query($sql, array($this->use_point, $this->use_id));
+    }
 }

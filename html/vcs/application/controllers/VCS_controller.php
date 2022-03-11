@@ -12,7 +12,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class VCS_controller extends CI_Controller
 {
-
+	/*
+    * @author Suwapat Saowarod 62160340
+    */
 	public function __construct()
 	{
 		parent::__construct();
@@ -76,9 +78,20 @@ class VCS_controller extends CI_Controller
 		$this->vuse->use_password = $this->input->post('password');
 		$check_login = $this->vuse->get_by_username_and_password();
 
-		if ($check_login) {
-			redirect('User/show_vote_list');
-		} else {
+		if($check_login){
+			// set session
+			$_SESSION['use_id'] = $check_login->use_id;
+			$_SESSION['use_name'] = $check_login->use_name;
+			$_SESSION['use_status'] = $check_login->use_status;
+			
+			if($_SESSION['use_status'] == 1){
+				$_SESSION['use_point'] = $check_login->use_point;
+				redirect('User/show_vote_list');
+			}else{
+				$this->show_manage_user_page();
+			}
+			
+		}else{
 			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
 			$this->output('v_login', $data);
 		}

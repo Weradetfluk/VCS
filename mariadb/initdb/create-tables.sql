@@ -52,7 +52,7 @@ CREATE TABLE `vcs_choice_vote` (
 -- Table `vcs_history_vote`
 -- -----------------------------------------------------
 CREATE TABLE `vcs_history_vote` (
-  `his_id` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'ไอดีของ history vote',
+  `his_id` int NOT NULL AUTO_INCREMENT COLLATE utf8_unicode_ci COMMENT 'ไอดีของ history vote',
   `his_date_vote` DATETIME NOT NULL COLLATE utf8_unicode_ci COMMENT 'วัน เวลาที่โหวต',
   `his_score` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'คะเเนนของ history vote',
   `his_cho_id` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'ไอดีของ choice vote',

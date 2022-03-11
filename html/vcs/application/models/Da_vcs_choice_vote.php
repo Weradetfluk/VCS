@@ -33,7 +33,7 @@ class Da_vcs_choice_vote extends VCS_model{
     */
     function update_score_by_cho_id()
     {
-        $sql = "UPDATE `vcs_choice_vote` SET `cho_score`+=?
+        $sql = "UPDATE `vcs_choice_vote` SET `cho_score`=?
                 WHERE cho_id = ?";
         $this->db->query($sql, array($this->cho_score, $this->cho_id));
     }

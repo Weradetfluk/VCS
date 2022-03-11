@@ -7,7 +7,7 @@
     <title>Vote Camp System</title>
 
 <!-- bootstap 4 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo base_url().'asset/bootstrap-4.6.1-dist'?>/css/bootstrap.min.css" type="text/css">
 
 <!-- icon -->
 <link rel="stylesheet" href="<?php echo base_url().'asset/icon/material_icon.css'?>" type="text/css">
