@@ -5,7 +5,13 @@
     padding-left: 16px;
   }
 </style>
-
+<?php 
+if (!$this->session->has_userdata("use_id")) {
+  $path = site_url()."VCS_controller/show_login_page";
+  header("Location: " . $path);
+  exit();
+}
+?>
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">
     <i class="material-icons">how_to_vote</i> Vote Camp System

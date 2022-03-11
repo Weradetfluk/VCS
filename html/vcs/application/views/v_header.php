@@ -11,3 +11,6 @@
 
 <!-- icon -->
 <link rel="stylesheet" href="<?php echo base_url().'asset/icon/material_icon.css'?>" type="text/css">
+
+</head>
+<body>

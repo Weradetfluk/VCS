@@ -60,7 +60,10 @@ class VCS_controller extends CI_Controller
 	*/
 	public function show_login_page()
 	{
-		$this->output('v_login');
+		$this->load->view('v_header');
+		$this->load->view('v_javascript');
+		$this->load->view('v_login');
+		$this->load->view('v_footer');
 	}
 
 	/*
