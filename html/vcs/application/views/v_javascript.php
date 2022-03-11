@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php 
- if (!$_SESSION['use_id']) {
+ if (isset($_SESSION['use_id'])) {
      $path = base_url();
      header("Location: " . $path);
      exit();
