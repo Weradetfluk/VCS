@@ -59,39 +59,48 @@
         <hr class="hr">
         <!-- ขีดเส้นใต้ -->
 
+        <?php if (count($arr_user) > 0) { ?>
+            <?php for ($i = 0; $i < count($arr_user); $i++) { ?>
 
-        <?php for ($i = 0; $i < count($arr_user); $i++) { ?>
+                <div class="row py-2" style="text-align: center">
+                    <div class="col">
+                        <p><?php echo $arr_user[$i]->use_name ?></p>
+                    </div>
+                    <!-- ชื่อมกุล -->
 
+                    <div class="col">
+                        <p><?php echo $arr_user[$i]->use_username ?></p>
+                    </div>
+                    <!-- ชื่อผู้ใช้ -->
+
+                    <div class="col">
+                        <p><?php echo $arr_user[$i]->use_password ?></p>
+                    </div>
+                    <!-- รหัสผ่าน -->
+
+                    <div class="col">
+                        <p><?php echo $arr_user[$i]->use_point ?></p>
+                    </div>
+                    <!-- คะแนน -->
+
+                    <div class="col">
+                        <button type="button" class="btn btn-warning">แก้ไข</button>
+                        <button type="button" class="btn btn-danger">ลบ</button>
+                    </div>
+                    <!-- ปุ่มจัดการ -->
+                </div>
+
+            <?php } ?>
+            <!-- For Loop ข้อมูลในตาราง -->
+        <?php } else { ?>
             <div class="row py-2" style="text-align: center">
                 <div class="col">
-                    <p><?php echo $arr_user[$i]->use_name ?></p>
+                    <h4>ไม่มีข้อมูล</h4>
                 </div>
-                <!-- ชื่อมกุล -->
-
-                <div class="col">
-                    <p><?php echo $arr_user[$i]->use_username ?></p>
-                </div>
-                <!-- ชื่อผู้ใช้ -->
-
-                <div class="col">
-                    <p><?php echo $arr_user[$i]->use_password ?></p>
-                </div>
-                <!-- รหัสผ่าน -->
-
-                <div class="col">
-                    <p><?php echo $arr_user[$i]->use_point ?></p>
-                </div>
-                <!-- คะแนน -->
-
-                <div class="col">
-                    <button type="button" class="btn btn-warning">แก้ไข</button>
-                    <button type="button" class="btn btn-danger">ลบ</button>
-                </div>
-                <!-- ปุ่มจัดการ -->
+                <!-- ไม่มีข้อมูล -->
             </div>
-
         <?php } ?>
-        <!-- For Loop ข้อมูลในตาราง -->
+        <!-- if else -->
 
         <div class="row py-4" style="text-align: center">
 
