@@ -80,12 +80,11 @@ class VCS_controller extends CI_Controller
 
 		if($check_login){
 			// set session
-			$_SESSION['use_id'] = $check_login->use_id;
-			$_SESSION['use_name'] = $check_login->use_name;
-			$_SESSION['use_status'] = $check_login->use_status;
-			
-			if($_SESSION['use_status'] == 1){
-				$_SESSION['use_point'] = $check_login->use_point;
+			$this->session->set_userdata("use_id", $check_login->use_id);
+			$this->session->set_userdata("use_name", $check_login->use_name);
+			$this->session->set_userdata("use_status", $check_login->use_status);
+			if($this->session->userdata("use_status") == 1){
+				$this->session->set_userdata("use_point", $check_login->use_point);
 				redirect('User/show_vote_list');
 			}else{
 				$this->show_manage_user_page();
@@ -95,6 +94,23 @@ class VCS_controller extends CI_Controller
 			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
 			$this->output('v_login', $data);
 		}
+	}
+
+	/*
+	* logout
+	* logout
+	* @input -
+	* @output -
+	* @author suwapat saowarod 62160340
+	* @Create Date 2565-03-12
+	*/
+	public function logout()
+	{
+		$this->session->unset_userdata("use_id");
+		$this->session->unset_userdata("use_name");
+		$this->session->unset_userdata("use_status");
+		$this->session->unset_userdata("use_point");
+		$this->output('v_login');
 	}
 
 	/*

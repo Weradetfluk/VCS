@@ -10,9 +10,9 @@
 </head>
 <body>
 <?php 
- if (isset($_SESSION['use_id'])) {
-     $path = base_url();
-     header("Location: " . $path);
-     exit();
- }
- ?>
+if (!$this->session->has_userdata("use_id")) {
+    $path = site_url().'';
+    header("Location: " . $path);
+    exit();
+}
+?>

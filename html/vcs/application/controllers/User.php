@@ -69,14 +69,15 @@ class User extends VCS_controller {
         $this->mcho->update_score_by_cho_id();
 
 		// vcs_user
-		$_SESSION['use_point'] -= $this->input->post('score_vote');
-		$this->musr->use_id = $_SESSION['use_id'];
-		$this->musr->use_point = $_SESSION['use_point'];
+		$point_sum = $this->session->userdata("use_point") - $this->input->post('score_vote');
+		$this->session->set_userdata("use_point", $point_sum);
+		$this->musr->use_id = $this->session->userdata("use_id");
+		$this->musr->use_point = $this->session->userdata("use_point");
 		$this->musr->update_point_by_use_id();
 
 		// vcs_history_vote
 		date_default_timezone_set('Asia/Bangkok');
-		$this->mhis->his_use_id = $_SESSION['use_id'];
+		$this->mhis->his_use_id = $this->session->userdata("use_id");
 		$this->mhis->his_cho_id = $this->input->post('cho_id');
 		$this->mhis->his_score = $this->input->post('score_vote');
 		$this->mhis->his_date_vote = date("Y-m-d H:i:s");
@@ -84,4 +85,13 @@ class User extends VCS_controller {
 
 		echo 1;
     }
+
+	function show(){
+		if($this->session->userdata("use_point") == 10000){
+			echo $this->session->userdata("use_id");
+			echo $this->session->userdata("use_name");
+			echo $this->session->userdata("use_status");
+			echo $this->session->userdata("use_point");
+		}
+	}
 }
