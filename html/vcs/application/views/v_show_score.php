@@ -3,8 +3,6 @@
         height: 500px;
     }
 </style>
-
-
 <div class="container" style="margin-top: 30px;">
     <div class="row">
         <div class="col">
@@ -12,8 +10,6 @@
         </div>
     </div>
 </div>
-
-
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
@@ -22,313 +18,122 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <script>
-    Highcharts.chart('container', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'OSSD #10'
-    },
-    subtitle: {
-        text: ''
-    },
-    accessibility: {
-        announceNewData: {
-            enabled: true
-        }
-    },
-    xAxis: {
-        type: 'category'
-    },
-    yAxis: {
-        title: {
-            text: 'คะแนน'
-        }
+    var cho_vot_id = <?php echo $cho_vot_id; ?>;
 
-    },
-    legend: {
-        enabled: false
-    },
-    plotOptions: {
-        series: {
-            borderWidth: 0,
-            dataLabels: {
-                enabled: true,
-            }
-        }
-    },
-
-    tooltip: {
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
-    },
-
-    series: [
-        {
-            name: "มกุล",
-            colorByPoint: true,
-            data: [
-                {
-                    name: "Chrome",
-                    y: 62.74,
-              
-                },
-                {
-                    name: "Firefox",
-                    y: 10.57,
-             
-                },
-                {
-                    name: "Internet Explorer",
-                    y: 7.23,
-     
-                },
-                {
-                    name: "Safari",
-                    y: 5.58,
-               
-                },
-                {
-                    name: "Edge",
-                    y: 4.02,
-            
-                },
-                {
-                    name: "Opera",
-                    y: 1.92,
-           
-                },
-                {
-                    name: "Other",
-                    y: 7.62,
-                }
-            ]
-        }
-    ],
-    drilldown: {
-        breadcrumbs: {
-            position: {
-                align: 'right'
-            }
-        },
-        series: [
-            {
-                name: "Chrome",
-                id: "Chrome",
-                data: [
-                    [
-                        "v65.0",
-                        0.1
-                    ],
-                    [
-                        "v64.0",
-                        1.3
-                    ],
-                    [
-                        "v63.0",
-                        53.02
-                    ],
-                    [
-                        "v62.0",
-                        1.4
-                    ],
-                    [
-                        "v61.0",
-                        0.88
-                    ],
-                    [
-                        "v60.0",
-                        0.56
-                    ],
-                    [
-                        "v59.0",
-                        0.45
-                    ],
-                    [
-                        "v58.0",
-                        0.49
-                    ],
-                    [
-                        "v57.0",
-                        0.32
-                    ],
-                    [
-                        "v56.0",
-                        0.29
-                    ],
-                    [
-                        "v55.0",
-                        0.79
-                    ],
-                    [
-                        "v54.0",
-                        0.18
-                    ],
-                    [
-                        "v51.0",
-                        0.13
-                    ],
-                    [
-                        "v49.0",
-                        2.16
-                    ],
-                    [
-                        "v48.0",
-                        0.13
-                    ],
-                    [
-                        "v47.0",
-                        0.11
-                    ],
-                    [
-                        "v43.0",
-                        0.17
-                    ],
-                    [
-                        "v29.0",
-                        0.26
-                    ]
-                ]
-            },
-            {
-                name: "Firefox",
-                id: "Firefox",
-                data: [
-                    [
-                        "v58.0",
-                        1.02
-                    ],
-                    [
-                        "v57.0",
-                        7.36
-                    ],
-                    [
-                        "v56.0",
-                        0.35
-                    ],
-                    [
-                        "v55.0",
-                        0.11
-                    ],
-                    [
-                        "v54.0",
-                        0.1
-                    ],
-                    [
-                        "v52.0",
-                        0.95
-                    ],
-                    [
-                        "v51.0",
-                        0.15
-                    ],
-                    [
-                        "v50.0",
-                        0.1
-                    ],
-                    [
-                        "v48.0",
-                        0.31
-                    ],
-                    [
-                        "v47.0",
-                        0.12
-                    ]
-                ]
-            },
-            {
-                name: "Internet Explorer",
-                id: "Internet Explorer",
-                data: [
-                    [
-                        "v11.0",
-                        6.2
-                    ],
-                    [
-                        "v10.0",
-                        0.29
-                    ],
-                    [
-                        "v9.0",
-                        0.27
-                    ],
-                    [
-                        "v8.0",
-                        0.47
-                    ]
-                ]
-            },
-            {
-                name: "Safari",
-                id: "Safari",
-                data: [
-                    [
-                        "v11.0",
-                        3.39
-                    ],
-                    [
-                        "v10.1",
-                        0.96
-                    ],
-                    [
-                        "v10.0",
-                        0.36
-                    ],
-                    [
-                        "v9.1",
-                        0.54
-                    ],
-                    [
-                        "v9.0",
-                        0.13
-                    ],
-                    [
-                        "v5.1",
-                        0.2
-                    ]
-                ]
-            },
-            {
-                name: "Edge",
-                id: "Edge",
-                data: [
-                    [
-                        "v16",
-                        2.6
-                    ],
-                    [
-                        "v15",
-                        0.92
-                    ],
-                    [
-                        "v14",
-                        0.4
-                    ],
-                    [
-                        "v13",
-                        0.1
-                    ]
-                ]
-            },
-            {
-                name: "Opera",
-                id: "Opera",
-                data: [
-                    [
-                        "v50.0",
-                        0.96
-                    ],
-                    [
-                        "v49.0",
-                        0.82
-                    ],
-                    [
-                        "v12.1",
-                        0.14
-                    ]
-                ]
-            }
-        ]
-    }
+    $(document).ready(function() {
+        get_data_score_ajax(cho_vot_id)
 });
+    function get_data_score_ajax(cho_vot_id) {
+        $.ajax({
+            type: 'post',
+            //path ตาม ที่ php เลย
+            url: '<?php echo base_url('Dashboard_score/get_score_vote_ajax'); ?>',
+            dataType: 'json',
+            data: {
+                cho_vot_id: cho_vot_id,
+            },
+            success: function() {
+
+            },
+            error: function() {
+                alert('ajax get data Chart not working');
+            }
+        }).then(function(json_data) {
+            create_chart_dashborad(json_data['arr_score']) // สร้าง chart ตามฟังก์ชัน
+            console.log(json_data);
+        });
+    }
+
+
+    function create_chart_dashborad(arr_score) {
+        var obj_data_point = []; // อาเรย์ข้อมูลที่ สร้าง Barchart  ประเภทกิจกรรม
+            
+
+          arr_score.forEach((row, index) => {
+       
+             obj_data_point.push({
+                    name: row['cho_name'],
+                    y: parseInt(row['cho_score']), // str to int
+                });
+
+                // จะได้ bar chart
+            });
+
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'OSSD #10'
+            },
+            subtitle: {
+                text: ''
+            },
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                }
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: 'คะแนน'
+                }
+
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
+            },
+
+            series: [{
+                name: "มกุล",
+                colorByPoint: true,
+                data: obj_data_point,
+            }],
+            exporting: {
+            buttons: {
+                customButton: {
+                    x: -62,
+                    onclick: function () {
+                        get_data_score_ajax(cho_vot_id);
+                    },
+                    text: 'Refetch',
+                }
+            }
+        }
+        });
+    }
+
+    Highcharts.SVGRenderer.prototype.symbols.refetch = function (x, y, w, h) {
+    var path = [
+        // Arrow stem
+        'M', x + w * 0.5, y,
+        'L', x + w * 0.5, y + h * 0.7,
+        // Arrow head
+        'M', x + w * 0.3, y + h * 0.5,
+        'L', x + w * 0.5, y + h * 0.7,
+        'L', x + w * 0.7, y + h * 0.5,
+        // Box
+        'M', x, y + h * 0.9,
+        'L', x, y + h,
+        'L', x + w, y + h,
+        'L', x + w, y + h * 0.9
+    ];
+    return path;
+};
 </script>
