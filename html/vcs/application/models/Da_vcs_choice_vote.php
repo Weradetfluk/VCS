@@ -37,4 +37,18 @@ class Da_vcs_choice_vote extends VCS_model{
                 WHERE cho_id = ?";
         $this->db->query($sql, array($this->cho_score, $this->cho_id));
     }
+    /*
+    * delete_choice_vote
+    * delete choice vote
+    * @input cho_id
+    * @output -
+    * @author Thanisorn thumsawanit 62160088
+    * @Create Date 2564-03-12
+    */
+    public function delete_choice_vote()
+    {
+        $sql = "DELETE `vcs_choice_vote` 
+				WHERE cho_id=?";
+        $this->db->query($sql, array($this->cho_id));
+    }
 }

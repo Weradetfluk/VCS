@@ -82,4 +82,20 @@ class User extends VCS_controller {
 
 		echo 1;
     }
+
+	/*
+    * delete_choice_vote_ajax
+    * delete choice vote
+    * @input cho_id
+    * @output -
+    * @author Thanisorn thumsawanit 62160088
+    * @Create Date 2565-03-12
+    * @Update -
+    */
+	public function delete_choice_vote_ajax()
+	{
+		$this->load->model('/M_vcs_choice_vote', 'mvcv');
+		$this->mvcv->cho_id = $this->input->post('cho_id');
+		$this->mvcv->delete_choice_vote();
+	}
 }

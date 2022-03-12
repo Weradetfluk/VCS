@@ -105,4 +105,36 @@
       }
     });
   }
+    /*
+     * delete_choice_vote_ajax
+     * delete choice vote
+     * @input cho_id
+     * @output choice vote deleted
+     * @author Thanisorn thumsawanit 62160088
+     * @Create Date 2565-03-12
+     */
+    function delete_choice_vote_ajax(cho_id) {
+        console.log(cho_id);
+        $.ajax({
+            type: "POST",
+            data: {
+              cho_id: cho_id
+            },
+            url: '<?php echo site_url() . 'User/delete_choice_vote_ajax/' ?>',
+            success: function() {
+                swal({
+                        title: "ลบตัวเลือกการโหวต",
+                        text: "ลบตัวเลือกการโหวตเสร็จสิ้น",
+                        type: "success"
+                    },
+                    function() {
+                        location.reload();
+                    })
+
+            },
+            error: function() {
+                alert('ajax error working');
+            }
+        });
+    }
 </script>
