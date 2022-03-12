@@ -11,6 +11,12 @@
     }
 </style>
 
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <i class="material-icons">how_to_vote</i> Vote Camp System
+  </a>
+</nav>
+
 <form action="<?php echo base_url() . 'VCS_controller/login'?>" method="POST">
     <div class="container container-form">
         <div class="card">
