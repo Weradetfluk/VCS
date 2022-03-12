@@ -1,4 +1,7 @@
 <div class="container" style="margin-top: 30px;">
+  <?php if ($this->session->userdata("use_status") == 2){?>
+      <button class="btn btn-info" style="float: right;">เพิ่มตัวเลือกการโหวต</button><br>
+  <?php }?>
   <div class="row">
     <?php for ($i = 0; $i < count($arr_choice_vote); $i++) { ?>
       <div class="card col-lg-3 col-sm-6" style="margin:20px 30px;">
@@ -47,12 +50,19 @@
     $('#name_vote').html(name);
     $('#modal_vote').modal();
 
-    $('#score_vote').keydown(function() {
+    $('#score_vote').blur(function() {
       var score = $('#score_vote').val();
-      if (score > 0) {
+      if (score > 0 && score <= <?= $this->session->userdata("use_point")?>) {
+        console.log(1);
         $('#submit').prop('disabled', false);
-      } else {
+      }else if(score <= 0) {
+        console.log(2);
         $('#submit').prop('disabled', true);
+        $('#score_vote').val('');
+      }else if(score > <?= $this->session->userdata("use_point")?>){
+        console.log(3);
+        $('#submit').prop('disabled', true);
+        $('#score_vote').val(<?= $this->session->userdata("use_point")?>);
       }
     });
 

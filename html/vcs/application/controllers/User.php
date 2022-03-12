@@ -28,9 +28,6 @@ class User extends VCS_controller {
         $this->load->model('M_vcs_vote', 'vvot');
         $data['arr_vote'] = $this->vvot->get_vote_all();
         $this->output('v_list_vote', $data);
-        // echo '<pre>';
-        // print_r($data['arr_vote']);
-        // echo '</pre>';
     }
 
 	/*
@@ -85,13 +82,4 @@ class User extends VCS_controller {
 
 		echo 1;
     }
-
-	function show(){
-		if($this->session->userdata("use_point") == 10000){
-			echo $this->session->userdata("use_id");
-			echo $this->session->userdata("use_name");
-			echo $this->session->userdata("use_status");
-			echo $this->session->userdata("use_point");
-		}
-	}
 }

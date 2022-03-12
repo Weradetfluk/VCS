@@ -21,7 +21,7 @@ if (!$this->session->has_userdata("use_id")) {
   if($this->session->has_userdata("use_status")){
     if($this->session->userdata("use_status") == 2){?>
       <span class="navbar-text">
-        <a class="make-nav" href="#">จัดการผลโหวด</a>
+        <a class="make-nav" href="<?php echo base_url().'User/show_vote_list'?>">จัดการผลโหวด</a>
         <a class="make-nav" href="#">จัดการผู้ใช้งาน</a>
         <a class="make-nav" href="#">ดูผลโหวด</a>
       </span>
