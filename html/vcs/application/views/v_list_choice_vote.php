@@ -1,6 +1,6 @@
 <div class="container" style="margin-top: 30px;">
   <?php if ($this->session->userdata("use_status") == 2){?>
-      <button class="btn btn-info" style="float: right;">เพิ่มตัวเลือกการโหวต</button><br>
+    <button type="button" class="btn btn-info" style="float: right;" data-toggle="modal" data-target="#myModal">เพิ่มตัวเลือกการโหวต</button><br>
   <?php }?>
   <div class="row">
     <?php for ($i = 0; $i < count($arr_choice_vote); $i++) { ?>
@@ -33,6 +33,48 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- Modal Add Choice Vote-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">ใส่ข้อมูลตัวเลือกการโหวต</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- ปุ่มปิด -->
+            </div>
+            <!-- ส่วนหัว -->
+
+            <form method='POST' action='<?php echo base_url('User/add_choice_vote') ?>'>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row py-2">
+                            <label class="low-lebel">ชื่อตัวเลือกโหวต</label>
+                            <input type="text" class="form-control" id="cho_name" name="cho_name" placeholder="ใส่ชื่อตัวเลือกโหวต">
+                        </div>
+                        <!-- ชื่อตัวเลือกโหวต -->
+
+                        <div class="row py-2">
+                            <label class="low-lebel">คะแนน</label>
+                            <input type="text" class="form-control" id="cho_score" name="cho_score" placeholder="ใส่คะแนน">
+                        </div>
+                        <!-- คะแนน -->
+                        <input type="hidden" class="form-control" id="vot_id" name="vot_id" value="<?= $vot_id?>">
+
+                    </div>
+                </div>
+                <!-- ส่วนตัว -->
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">ยืนยัน</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                </div>
+                <!-- ส่วนหาง -->
+            </form>
+            <!-- Form -->
+        </div>
+    </div>
 </div>
 
 <script>

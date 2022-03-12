@@ -51,4 +51,18 @@ class Da_vcs_choice_vote extends VCS_model{
 				WHERE cho_id=?";
         $this->db->query($sql, array($this->cho_id));
     }
+
+    /*
+    * add_choice_vote
+    * Add Choice Vote
+    * @input data
+    * @output 
+    * @author Priyarat Bumrungkit 62160156
+    * @Create Date 2565-03-12
+    */ 
+    public function add_choice_vote()
+    {
+        $sql = "INSERT INTO vcs_choice_vote(cho_name, cho_score, cho_vot_id) VALUES(?, ?, ?)";
+        $this->db->query($sql, array($this->cho_name, $this->cho_score, $this->cho_vot_id));
+    }
 }

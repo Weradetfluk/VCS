@@ -42,8 +42,8 @@ class User extends VCS_controller {
         $this->load->model('M_vcs_choice_vote', 'mcho');
 		$this->mcho->cho_vot_id = $vot_id;
         $data['arr_choice_vote'] = $this->mcho->get_choice_vote_by_vot_id();
+		$data['vot_id'] = $vot_id;
         $this->output('v_list_choice_vote', $data);
-
     }
 
 	/*
@@ -97,5 +97,23 @@ class User extends VCS_controller {
 		$this->load->model('/M_vcs_choice_vote', 'mvcv');
 		$this->mvcv->cho_id = $this->input->post('cho_id');
 		$this->mvcv->delete_choice_vote();
+	}
+	
+	/*
+ 	* add_choice_vote
+ 	* add choice vote
+ 	* @input data
+ 	* @output -
+ 	* @author Priyarat Bumrungkit 62160156
+ 	* @Create Date 2565-03-12
+ 	*/
+	public function add_choice_vote()
+	{
+ 		$this->load->model('/M_vcs_choice_vote', 'mcho');
+ 		$this->mcho->cho_name = $this->input->post('cho_name');
+ 		$this->mcho->cho_score = $this->input->post('cho_score');
+ 		$this->mcho->cho_vot_id = $this->input->post('vot_id');
+ 		$this->mcho->add_choice_vote();
+ 		$this->show_choice_vote_list($this->input->post('vot_id'));
 	}
 }
