@@ -53,7 +53,7 @@
                                 value="<?= $arr_choice_vote[$i]->cho_id ?>">
                             <div class="row">
                                 <div class="col-md">
-                                    <label>ชื่อ</label>
+                                    <label>ชื่อตัวเลือกโหวต</label>
                                     <input type="text" class="form-control"
                                         id="txtChoiceName<?= $arr_choice_vote[$i]->cho_id ?>" name="txtChoiceName"
                                         value="<?= $arr_choice_vote[$i]->cho_name  ?>">
@@ -136,34 +136,34 @@
             </div>
             <!-- ส่วนหัว -->
 
-            <form method='POST' action='<?php echo base_url('User/add_choice_vote') ?>'>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row py-2">
-                            <label class="low-lebel">ชื่อตัวเลือกโหวต</label>
-                            <input type="text" class="form-control" id="cho_name" name="cho_name"
-                                placeholder="ใส่ชื่อตัวเลือกโหวต">
-                        </div>
-                        <!-- ชื่อตัวเลือกโหวต -->
+            <!-- <form method='POST' action='<?php echo base_url('User/add_choice_vote') ?>'> -->
+            <div class="modal-body">
+                <div class="container">
 
-                        <div class="row py-2">
-                            <label class="low-lebel">คะแนน</label>
-                            <input type="text" class="form-control" id="cho_score" name="cho_score"
-                                placeholder="ใส่คะแนน">
-                        </div>
-                        <!-- คะแนน -->
-                        <input type="hidden" class="form-control" id="vot_id" name="vot_id" value="<?= $vot_id ?>">
+                    <input type="hidden" class="form-control" id="vot_id" name="vot_id" value="<?= $vot_id ?>">
 
+                    <div class="row py-2">
+                        <label class="low-lebel">ชื่อตัวเลือกโหวต</label>
+                        <input type="text" class="form-control" id="cho_name" name="cho_name"
+                            placeholder="ใส่ชื่อตัวเลือกโหวต">
                     </div>
-                </div>
-                <!-- ส่วนตัว -->
+                    <!-- ชื่อตัวเลือกโหวต -->
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">ยืนยัน</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                    <div class="row py-2">
+                        <label class="low-lebel">คะแนน</label>
+                        <input type="text" class="form-control" id="cho_score" name="cho_score" placeholder="ใส่คะแนน">
+                    </div>
+
                 </div>
-                <!-- ส่วนหาง -->
-            </form>
+            </div>
+            <!-- ส่วนตัว -->
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" onclick="add_choice_vote()">ยืนยัน</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+            </div>
+            <!-- ส่วนหาง -->
+            <!-- </form> -->
             <!-- Form -->
         </div>
     </div>
@@ -239,38 +239,35 @@ function vote_ajax(id, score) {
         }
     });
 }
-// /*
-//  * delete_choice_vote_ajax
-//  * delete choice vote
-//  * @input cho_id
-//  * @output choice vote deleted
-//  * @author Thanisorn thumsawanit 62160088
-//  * @Create Date 2565-03-12
-//  */
-// function delete_choice_vote_ajax(cho_id) {
-//     console.log(cho_id);
-//     $.ajax({
-//         type: "POST",
-//         data: {
-//             cho_id: cho_id
-//         },
-//         url: '<?php echo site_url() . '/User/delete_choice_vote_ajax/' ?>',
-//         success: function() {
-//             swal({
-//                     title: "ลบตัวเลือกการโหวต",
-//                     text: "ลบตัวเลือกการโหวตเสร็จสิ้น",
-//                     type: "success"
-//                 },
-//                 function() {
-//                     location.reload();
-//                 })
 
-//         },
-//         error: function() {
-//             alert('ajax error working');
-//         }
-//     });
-// }
+function add_choice_vote() {
+
+    $.ajax({
+        type: "POST",
+        url: '<?php echo site_url() . 'User/add_choice_vote/' ?>',
+        data: {
+            vot_id: $("#vot_id").val(),
+            cho_name: $("#cho_name").val(),
+            cho_score: $("#cho_score").val()
+        },
+        success: function() {
+            // swal({
+            //         title: "อัพเดทตัวเลือกการโหวต",
+            //         text: "อัพเดทตัวเลือกการโหวตเสร็จสิ้น",
+            //         type: "success"
+            //     },
+            //     function() {
+            //         location.reload();
+            //     })
+            location.reload();
+
+        },
+        error: function() {
+            alert('ajax error working');
+        }
+    });
+}
+
 
 /*
  * update_choice_vote_ajax
