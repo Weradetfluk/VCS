@@ -18,6 +18,7 @@ class VCS_controller extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('mydate_helper.php');
 	}
 
 	/*
@@ -86,8 +87,8 @@ class VCS_controller extends CI_Controller
 			$this->session->set_userdata("use_id", $check_login->use_id);
 			$this->session->set_userdata("use_name", $check_login->use_name);
 			$this->session->set_userdata("use_status", $check_login->use_status);
+			$this->session->set_userdata("use_point", $check_login->use_point);
 			if($this->session->userdata("use_status") == 1){
-				$this->session->set_userdata("use_point", $check_login->use_point);
 				redirect('User/show_vote_list');
 			}else{
 				$this->show_manage_user_page();

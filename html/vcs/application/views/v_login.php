@@ -27,13 +27,13 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="username"><span class="material-icons">account_circle</span></label>
-                        <input class="form-control" type="text" name="username" placeholder="Username">
+                        <input class="form-control" type="text" name="username" placeholder="Username" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
                         <label for="password"><span class="material-icons">password</span></label>
-                        <input class="form-control" type="password" name="password" placeholder="Password">
+                        <input class="form-control" type="password" name="password" placeholder="Password" required>
                     </div>
                 </div>
                 <span style="color: red;">

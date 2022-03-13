@@ -18,7 +18,7 @@ CREATE TABLE `vcs_user` (
   `use_username` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci COMMENT ' ชื่อผู้ใช้ของ User ',
   `use_password` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci COMMENT ' รหัสผ่านของ User ',
   `use_status` int NOT NULL COLLATE utf8_unicode_ci COMMENT ' สถานะของ User เช่น 1 = ผู้ใช้ทั่วไป, 2 = แอดมิน',
-  `use_point` int DEFAULT NULL COLLATE utf8_unicode_ci COMMENT ' คะเเนนที่สามารถโหวตได้ของ User ',
+  `use_point` int DEFAULT 0 COLLATE utf8_unicode_ci COMMENT ' คะเเนนที่สามารถโหวตได้ของ User ',
   PRIMARY KEY (`use_id`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
