@@ -33,24 +33,32 @@
             <div class="modal-header">
                 <h5 class="modal-title">เพิ่มโหวต</h5>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="name">ชื่อโหวต</label>
-                    <input class="form-control" type="text" id="name" placeholder="กรอกชื่อโหวต">
+            <form action="<?php echo base_url() . "User/add_vote/"?>" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div id="image"></div>
+                    <div class="form-group">
+                        <label for="name">ชื่อโหวต</label>
+                        <input class="form-control" type="text" id="name" placeholder="กรอกชื่อโหวต">
+                    </div>
+                    <div class="form-group">
+                        <label for="start_vote">วันที่เริ่มโหวต</label>
+                        <input class="form-control" type="datetime-local" id="start_vote">
+                    </div>
+                    <div class="form-group">
+                        <label for="end_vote">วันที่สิ้นสุดโหวต</label>
+                        <input class="form-control" type="datetime-local" id="end_vote">
+                    </div>
+                    <div class="form-group">
+                        <label for="vot_path">รูปภาพ</label><br>
+                        <input type="file" id="vot_path" hidden>
+                        <a class="btn btn-primary" onclick="document.getElementById('vot_path').click();">อัปโหลด</a>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="start_vote">วันที่เริ่มโหวต</label>
-                    <input class="form-control" type="datetime-local" id="start_vote">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" id="submit" class="btn btn-success">บันทึก</button>
                 </div>
-                <div class="form-group">
-                    <label for="end_vote">วันที่สิ้นสุดโหวต</label>
-                    <input class="form-control" type="datetime-local" id="end_vote">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                <button id="submit" class="btn btn-success">บันทึก</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -68,9 +76,9 @@
     function show_modal_add_vote() {
         $('#modal_add_vote').modal();
 
-        $('#submit').click(function() {
-            add_vote_ajax();
-        });
+        // $('#submit').click(function() {
+        //     add_vote_ajax();
+        // });
     }
 
     /*  
