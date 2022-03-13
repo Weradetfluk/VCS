@@ -6,11 +6,12 @@
 * @Create Date 2565-03-10
 */
 defined('BASEPATH') or exit('No direct script access allowed');
-include_once dirname(__FILE__) ."/VCS_model.php";
-class Da_vcs_choice_vote extends VCS_model{
-	
-	public $cho_id;
-	public $cho_name;
+include_once dirname(__FILE__) . "/VCS_model.php";
+class Da_vcs_choice_vote extends VCS_model
+{
+
+    public $cho_id;
+    public $cho_name;
     public $cho_score;
     public $cho_vot_id;
 
@@ -47,9 +48,19 @@ class Da_vcs_choice_vote extends VCS_model{
     */
     public function delete_choice_vote()
     {
-        $sql = "DELETE `vcs_choice_vote` 
+        $sql = "DELETE FROM `vcs_choice_vote` 
 				WHERE cho_id=?";
         $this->db->query($sql, array($this->cho_id));
+    }
+
+    public function update_choice_vote()
+    {
+        $sql = "UPDATE `vcs_choice_vote` SET 
+                    `cho_name`=?,
+                    `cho_score`=?
+                WHERE cho_id = ?";
+
+        $this->db->query($sql, array($this->cho_name, $this->cho_score, $this->cho_id));
     }
 
     /*
@@ -59,7 +70,7 @@ class Da_vcs_choice_vote extends VCS_model{
     * @output 
     * @author Priyarat Bumrungkit 62160156
     * @Create Date 2565-03-12
-    */ 
+    */
     public function add_choice_vote()
     {
         $sql = "INSERT INTO vcs_choice_vote(cho_name, cho_score, cho_vot_id) VALUES(?, ?, ?)";

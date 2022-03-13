@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-include_once dirname(__FILE__) ."/VCS_controller.php";
-class User extends VCS_controller {
+defined('BASEPATH') or exit('No direct script access allowed');
+include_once dirname(__FILE__) . "/VCS_controller.php";
+class User extends VCS_controller
+{
 
 	/*
 	* index
@@ -10,25 +11,26 @@ class User extends VCS_controller {
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-01
-	*/ 
+	*/
 	public function index()
 	{
 		$this->show_vote_list();
 	}
 
-    /*
+	/*
 	* show_vote_list
 	* show list vote 
 	* @input -
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-06
-	*/ 
-    public function show_vote_list(){
-        $this->load->model('M_vcs_vote', 'vvot');
-        $data['arr_vote'] = $this->vvot->get_vote_all();
-        $this->output('v_list_vote', $data);
-    }
+	*/
+	public function show_vote_list()
+	{
+		$this->load->model('M_vcs_vote', 'vvot');
+		$data['arr_vote'] = $this->vvot->get_vote_all();
+		$this->output('v_list_vote', $data);
+	}
 
 	/*
 	* show_choice_vote_list
@@ -37,14 +39,15 @@ class User extends VCS_controller {
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-06
-	*/ 
-    public function show_choice_vote_list($vot_id){
-        $this->load->model('M_vcs_choice_vote', 'mcho');
+	*/
+	public function show_choice_vote_list($vot_id)
+	{
+		$this->load->model('M_vcs_choice_vote', 'mcho');
 		$this->mcho->cho_vot_id = $vot_id;
-        $data['arr_choice_vote'] = $this->mcho->get_choice_vote_by_vot_id();
+		$data['arr_choice_vote'] = $this->mcho->get_choice_vote_by_vot_id();
 		$data['vot_id'] = $vot_id;
-        $this->output('v_list_choice_vote', $data);
-    }
+		$this->output('v_list_choice_vote', $data);
+	}
 
 	/*
 	* vote_ajax
@@ -53,8 +56,9 @@ class User extends VCS_controller {
 	* @output -
 	* @author suwapat saowarod 62160340
 	* @Create Date 2565-03-10
-	*/ 
-    public function vote_ajax(){
+	*/
+	public function vote_ajax()
+	{
 		$this->load->model('M_vcs_choice_vote', 'mcho');
 		$this->load->model('M_vcs_user', 'musr');
 		$this->load->model('M_vcs_history_vote', 'mhis');
@@ -63,7 +67,7 @@ class User extends VCS_controller {
 		$score_sum = $this->input->post('score_vote') + $this->input->post('cho_score');
 		$this->mcho->cho_score = $score_sum;
 		$this->mcho->cho_id = $this->input->post('cho_id');
-        $this->mcho->update_score_by_cho_id();
+		$this->mcho->update_score_by_cho_id();
 
 		// vcs_user
 		$point_sum = $this->session->userdata("use_point") - $this->input->post('score_vote');
@@ -81,7 +85,7 @@ class User extends VCS_controller {
 		$this->mhis->insert_history_vote();
 
 		echo 1;
-    }
+	}
 
 	/*
     * delete_choice_vote_ajax
@@ -98,7 +102,18 @@ class User extends VCS_controller {
 		$this->mvcv->cho_id = $this->input->post('cho_id');
 		$this->mvcv->delete_choice_vote();
 	}
-	
+
+	public function update_choice_vote_ajax()
+	{
+
+		$this->load->model('/M_vcs_choice_vote', 'mvcv');
+		$this->mvcv->cho_id = $this->input->post('cho_id');
+		$this->mvcv->cho_name = $this->input->post('choice_name');
+		$this->mvcv->cho_score = $this->input->post('choice_score');
+		$this->mvcv->update_choice_vote();
+	}
+
+
 	/*
  	* add_choice_vote
  	* add choice vote
@@ -109,11 +124,11 @@ class User extends VCS_controller {
  	*/
 	public function add_choice_vote()
 	{
- 		$this->load->model('/M_vcs_choice_vote', 'mcho');
- 		$this->mcho->cho_name = $this->input->post('cho_name');
- 		$this->mcho->cho_score = $this->input->post('cho_score');
- 		$this->mcho->cho_vot_id = $this->input->post('vot_id');
- 		$this->mcho->add_choice_vote();
- 		$this->show_choice_vote_list($this->input->post('vot_id'));
+		$this->load->model('/M_vcs_choice_vote', 'mcho');
+		$this->mcho->cho_name = $this->input->post('cho_name');
+		$this->mcho->cho_score = $this->input->post('cho_score');
+		$this->mcho->cho_vot_id = $this->input->post('vot_id');
+		$this->mcho->add_choice_vote();
+		$this->show_choice_vote_list($this->input->post('vot_id'));
 	}
 }
