@@ -82,19 +82,18 @@ class VCS_controller extends CI_Controller
 		$this->vuse->use_password = $this->input->post('password');
 		$check_login = $this->vuse->get_by_username_and_password();
 
-		if($check_login){
+		if ($check_login) {
 			// set session
 			$this->session->set_userdata("use_id", $check_login->use_id);
 			$this->session->set_userdata("use_name", $check_login->use_name);
 			$this->session->set_userdata("use_status", $check_login->use_status);
 			$this->session->set_userdata("use_point", $check_login->use_point);
-			if($this->session->userdata("use_status") == 1){
+			if ($this->session->userdata("use_status") == 1) {
 				redirect('User/show_vote_list');
-			}else{
+			} else {
 				$this->show_manage_user_page();
 			}
-			
-		}else{
+		} else {
 			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
 			$this->output('v_login', $data);
 		}
@@ -153,10 +152,9 @@ class VCS_controller extends CI_Controller
 
 		$this->vuse->add_user();
 		redirect('VCS_controller/show_manage_user_page');
-
 	}
 
-	
+
 	/*
 	* update_user_information
 	* update_user_information
@@ -178,5 +176,19 @@ class VCS_controller extends CI_Controller
 
 		$this->vuse->update_user();
 		redirect('VCS_controller/show_manage_user_page');
+	}
+	/*
+    * delete_use
+    * update use_status = 4 in database
+    * @input use_id
+    * @output -
+    * @author Acharaporn pornpattanasap 62160344
+    * @Create Date 2565-03-12
+    */
+	public function delete_user()
+	{
+		$this->load->model('/M_vcs_user', 'vuse');
+		$this->vuse->use_id = $this->input->post('use_id');
+		$this->vuse->delete_user();
 	}
 }

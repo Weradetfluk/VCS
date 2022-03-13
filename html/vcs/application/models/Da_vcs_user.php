@@ -32,7 +32,7 @@ class Da_vcs_user extends VCS_model
 	* @output -
 	* @author naaka punparich 62160082 
 	* @Create Date 2565-03-01
-	*/ 
+	*/
     public function add_user()
     {
         $sql = "INSERT INTO vcs_user(use_id, use_name, use_username, use_password, use_status, use_point) VALUES(?, ?, ?, ?, ?, ?)";
@@ -62,12 +62,28 @@ class Da_vcs_user extends VCS_model
 	* @output -
 	* @author Chutipon Thermsirisuksin 62160081 
 	* @Create Date 2565-03-13
-	*/ 
+	*/
     public function update_user()
     {
         $sql = "UPDATE vcs_user
                 SET use_name = ?, use_username = ?, use_password = ?, use_status = ?, use_point = ?
                 WHERE use_id = ?";
         $this->db->query($sql, array($this->use_name, $this->use_username, $this->use_password, $this->use_status, $this->use_point, $this->use_id));
+    }
+
+    /*
+    * delete_user
+    * update use_status == 4
+    * @input use_id
+    * @output -
+    * @author Acharaporn 62160344
+    * @Create Date 2565-03-12
+    */
+    public function delete_user()
+    {
+        $sql = "DELETE FROM `vcs_user` 
+				
+        WHERE use_id=?";
+        $this->db->query($sql, array($this->use_id));
     }
 }
