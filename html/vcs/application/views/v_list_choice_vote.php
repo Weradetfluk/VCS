@@ -272,6 +272,14 @@ function vote_ajax(id, score) {
 //     });
 // }
 
+/*
+ * update_choice_vote_ajax
+ * update choice vote
+ * @input cho_id
+ * @output choice vote update
+ * @author Jutamas Thaptong 62160079
+ * @Create Date 2565-03-12
+ */
 function update_choice_vote(cho_id) {
     $.ajax({
         type: "POST",
