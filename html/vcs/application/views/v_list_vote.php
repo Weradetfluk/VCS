@@ -1,3 +1,16 @@
+<style>
+    .div-span-image{
+        position: relative;
+        height: 40px;
+        margin-top: -40px;
+        background: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        line-height: 40px;
+        font-size: 13px;
+        color: #f5f5f5;
+        font-weight: 600;
+    }
+</style>
 <div class="container" style="margin-top: 10px;">
     <div class="row" style="padding: 15px;">
         <?php if ($this->session->userdata("use_status") == 2) { ?>
@@ -33,25 +46,35 @@
             <div class="modal-header">
                 <h5 class="modal-title">เพิ่มโหวต</h5>
             </div>
-            <form action="<?php echo base_url() . "User/add_vote/"?>" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() . "User/add_vote/" ?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div id="image"></div>
-                    <div class="form-group">
-                        <label for="name">ชื่อโหวต</label>
-                        <input class="form-control" type="text" id="name" placeholder="กรอกชื่อโหวต">
+                    <div class="row" style="text-align: center; background-color: #F1F2F1;">
+                        <div class="container" style="width: 300px; height:auto;">
+                            <label for="vot_path" style="margin-top: 10px;">
+                                <img src="https://bit.ly/3ubuq5o" alt="" style="width: 100%; height: 200px; object-fit: cover;" id="image_vote">
+                                <div class="div-span-image">
+                                    <span style="font-size: 25px;" id="name_image">+</span>
+                                </div>
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="start_vote">วันที่เริ่มโหวต</label>
-                        <input class="form-control" type="datetime-local" id="start_vote">
-                    </div>
-                    <div class="form-group">
-                        <label for="end_vote">วันที่สิ้นสุดโหวต</label>
-                        <input class="form-control" type="datetime-local" id="end_vote">
-                    </div>
-                    <div class="form-group">
-                        <label for="vot_path">รูปภาพ</label><br>
-                        <input type="file" id="vot_path" hidden>
-                        <a class="btn btn-primary" onclick="document.getElementById('vot_path').click();">อัปโหลด</a>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="name">ชื่อโหวต</label>
+                            <input class="form-control" type="text" id="name" placeholder="กรอกชื่อโหวต">
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="start_vote">วันที่เริ่มโหวต</label>
+                            <input class="form-control" type="datetime-local" id="start_vote">
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="end_vote">วันที่สิ้นสุดโหวต</label>
+                            <input class="form-control" type="datetime-local" id="end_vote">
+                        </div>
+                        <div class="form-group col-12">
+                            <input type="file" id="vot_path" accept="image/*" hidden>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -64,6 +87,10 @@
 </div>
 
 <script>
+    $( document ).ready(function() {
+        preview_image();
+    });
+
     /*  
      * show_modal_add_vote
      * show modal add vote
@@ -76,42 +103,28 @@
     function show_modal_add_vote() {
         $('#modal_add_vote').modal();
 
-        // $('#submit').click(function() {
-        //     add_vote_ajax();
-        // });
     }
 
     /*  
-     * add_vote_ajax
-     * add vote 
+     * preview_image
+     * preview image
      * @input -
      * @output -
      * @author Suwapat Saowarod 62160340
-     * @Create Date 2565-03-12
+     * @Create Date 2565-03-14
      * @Update -
      */
-    function add_vote_ajax() {
-        var name = $('#name').val();
-        var start_time = $('#start_vote').val();
-        var end_time = $('#end_time').val();
-        
-        $.ajax({
-            url: "<?php echo base_url() . "User/add_vote_ajax/" ?>",
-            method: "POST",
-            dataType: "JSON",
-            data: {
-                vot_name: name,
-                vot_start_time: start_time,
-                vot_end_time: end_time
-            },
-            success: function(data) {
-                swal("สำเร็จ", "คุณได้ทำการเพิ่มโหวตเสร็จสิ้น", "success").then(function(){
-                location.reload();
-                });
-            },
-            error: function() {
-                alert('ajax error working');
+    function preview_image(){
+        document.querySelector("#vot_path").addEventListener("change",function(e){
+            if(e.target.files.length == 0){
+                document.querySelector(".div-span-image").style.display = "block";
+                document.querySelector("#image_vote").src = 'https://bit.ly/3ubuq5o';
+                return;
             }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector(".div-span-image").style.display = "none";
+            document.querySelector("#image_vote").src = url;
         });
     }
 </script>
