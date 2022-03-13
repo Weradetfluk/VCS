@@ -61,10 +61,11 @@
 
         <?php if (count($arr_user) > 0) { ?>
             <?php for ($i = 0; $i < count($arr_user); $i++) { ?>
-
+                
                 <div class="row py-2" style="text-align: center">
                     <div class="col">
                         <p><?php echo $arr_user[$i]->use_name ?></p>
+                        
                     </div>
                     <!-- ชื่อมกุล -->
 
@@ -84,7 +85,7 @@
                     <!-- คะแนน -->
 
                     <div class="col">
-                        <button type="button" class="btn btn-warning">แก้ไข</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_modal">แก้ไข</button>
                         <button type="button" class="btn btn-danger">ลบ</button>
                     </div>
                     <!-- ปุ่มจัดการ -->
@@ -139,6 +140,59 @@
                         <div class="row py-2">
                             <label class="low-lebel">ชื่อมกุล</label>
                             <input type="text" class="form-control" id="use_name" name="use_name" placeholder="ใส่ชื่อมกุล">
+                        </div>
+                        <!-- ชื่อมกุล -->
+
+                        <div class="row py-2">
+                            <label class="low-lebel">ชื่อผู้ใช้</label>
+                            <input type="text" class="form-control" id="use_username" name="use_username" placeholder="ใส่ชื่อผู้ใช้">
+                        </div>
+                        <!-- ชื่อผู้ใช้ -->
+
+                        <div class="row py-2">
+                            <label class="low-lebel">รหัสผ่าน</label>
+                            <input type="text" class="form-control" id="use_password" name="use_password" placeholder="ใส่รหัสผ่าน">
+                        </div>
+                        <!-- รหัสผ่าน -->
+
+                        <div class="row py-2">
+                            <label class="low-lebel">คะแนน</label>
+                            <input type="text" class="form-control" id="use_point" name="use_point" placeholder="ใส่คะแนน">
+                        </div>
+                        <!-- คะแนน -->
+
+                    </div>
+                </div>
+                <!-- ส่วนตัว -->
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">ยืนยัน</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                </div>
+                <!-- ส่วนหาง -->
+            </form>
+            <!-- Form -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal edit user -->
+<div class="modal fade" id="edit_modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">ใส่ข้อมูลที่ต้องการ</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- ปุ่มปิด -->
+            </div>
+            <!-- ส่วนหัว -->
+
+            <form method='POST' action='<?php echo base_url('VCS_controller/update_user_information') ?>'>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row py-2">
+                            <label class="low-lebel">ชื่อมกุล</label>
+                            <input type="text" class="form-control" id="use_name" name="use_name" placeholder="ใส่ชื่อมกุล" value="<?php echo $arr_user[$i]->use_name ?>">
                         </div>
                         <!-- ชื่อมกุล -->
 

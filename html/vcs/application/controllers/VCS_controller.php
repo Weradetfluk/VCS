@@ -153,5 +153,30 @@ class VCS_controller extends CI_Controller
 
 		$this->vuse->add_user();
 		redirect('VCS_controller/show_manage_user_page');
+
+	}
+
+	
+	/*
+	* update_user_information
+	* update_user_information
+	* @input data
+	* @output -
+	* @author Chutipon Thermsirisuksin 62160081 
+	* @Create Date 2565-03-13
+	*/
+	public function update_user_information()
+	{
+		$this->load->model('/Da_vcs_user', 'vuse');
+
+		$this->vuse->use_id = intval($this->input->post('use_id'));
+		$this->vuse->use_name = $this->input->post('use_name');
+		$this->vuse->use_username = $this->input->post('use_username');
+		$this->vuse->use_password = $this->input->post('use_password');
+		$this->vuse->use_status = 1;
+		$this->vuse->use_point = $this->input->post('use_point');
+
+		$this->vuse->update_user();
+		redirect('VCS_controller/show_manage_user_page');
 	}
 }

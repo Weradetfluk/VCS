@@ -54,4 +54,20 @@ class Da_vcs_user extends VCS_model
                 WHERE `use_id` = ?";
         $this->db->query($sql, array($this->use_point, $this->use_id));
     }
+
+    /*
+	* update_user
+	* update user
+	* @input data
+	* @output -
+	* @author Chutipon Thermsirisuksin 62160081 
+	* @Create Date 2565-03-13
+	*/ 
+    public function update_user()
+    {
+        $sql = "UPDATE vcs_user
+                SET use_name = ?, use_username = ?, use_password = ?, use_status = ?, use_point = ?
+                WHERE use_id = ?";
+        $this->db->query($sql, array($this->use_name, $this->use_username, $this->use_password, $this->use_status, $this->use_point, $this->use_id));
+    }
 }
