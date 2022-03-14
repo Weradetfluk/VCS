@@ -67,7 +67,7 @@ class VCS_controller extends CI_Controller
 		$this->load->view('v_footer');
 	}
 
-	/*
+	/*	
 	* login
 	* login
 	* @input username, password
@@ -95,7 +95,10 @@ class VCS_controller extends CI_Controller
 			}
 		} else {
 			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
-			$this->output('v_login', $data);
+			$this->load->view('v_header');
+			$this->load->view('v_javascript');
+			$this->load->view('v_login', $data);
+			$this->load->view('v_footer');
 		}
 	}
 
@@ -113,7 +116,10 @@ class VCS_controller extends CI_Controller
 		$this->session->unset_userdata("use_name");
 		$this->session->unset_userdata("use_status");
 		$this->session->unset_userdata("use_point");
-		$this->output('v_login');
+		$this->load->view('v_header');
+		$this->load->view('v_javascript');
+		$this->load->view('v_login');
+		$this->load->view('v_footer');
 	}
 
 	/*

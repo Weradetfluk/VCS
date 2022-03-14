@@ -22,10 +22,11 @@ if (!$this->session->has_userdata("use_id")) {
     if($this->session->userdata("use_status") == 2){?>
       <span class="navbar-text">
         <a class="make-nav" href="<?php echo base_url().'User/show_vote_list'?>">จัดการผลโหวด</a>
-        <a class="make-nav" href="#">จัดการผู้ใช้งาน</a>
-        <a class="make-nav" href="#">ดูผลโหวด</a>
+        <a class="make-nav" href="<?php echo base_url().'VCS_controller/show_manage_user_page'?>">จัดการผู้ใช้งาน</a>
+        <a class="make-nav" href="<?php echo base_url().'Dashboard_score/show_dasbord_score_page/1'?>">ดูผลโหวด</a>
       </span>
     <?php }?>
-    <a class="make-nav" href="<?= base_url() . 'VCS_controller/logout'?>">Logout</a>
+    <a class="btn btn-outline-danger" href="<?= base_url() . 'VCS_controller/logout'?>">Logout</a>
+    <!-- <a class="make-nav" href="<?= base_url() . 'VCS_controller/logout'?>">Logout</a> -->
   <?php }?>
 </nav>

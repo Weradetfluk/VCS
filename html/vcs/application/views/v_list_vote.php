@@ -20,7 +20,9 @@
     <div class="row">
         <?php for ($i = 0; $i < count($arr_vote); $i++) { ?>
             <div class="card col-lg-4 col-sm-8 col-md-10 col-12" style="margin:20px 30px;">
-                <img src="<?= base_url() . '/images/image_vote.jpg' ?>" class="card-img-top">
+                <div class="container" style="width: 200px;">
+                    <img src="<?= base_url() . 'image_vote/'. $arr_vote[$i]->vot_path?>" class="card-img-top" style="width: 100%; height: 200px; object-fit: contain;">
+                </div>
                 <div class="card-body">
                     <center>
                         <h5><?php echo $arr_vote[$i]->vot_name ?></h5>
@@ -62,18 +64,18 @@
                     <div class="row">
                         <div class="form-group col-12">
                             <label for="name">ชื่อโหวต</label>
-                            <input class="form-control" type="text" id="name" placeholder="กรอกชื่อโหวต">
+                            <input class="form-control" type="text" id="name" name="name" placeholder="กรอกชื่อโหวต">
                         </div>
                         <div class="form-group col-12">
                             <label for="start_vote">วันที่เริ่มโหวต</label>
-                            <input class="form-control" type="datetime-local" id="start_vote">
+                            <input class="form-control" type="datetime-local" id="start_vote" name="start_vote">
                         </div>
                         <div class="form-group col-12">
                             <label for="end_vote">วันที่สิ้นสุดโหวต</label>
-                            <input class="form-control" type="datetime-local" id="end_vote">
+                            <input class="form-control" type="datetime-local" id="end_vote" name="end_vote">
                         </div>
                         <div class="form-group col-12">
-                            <input type="file" id="vot_path" accept="image/*" hidden>
+                            <input type="file" name="vot_path" id="vot_path" accept="image/*" hidden>
                         </div>
                     </div>
                 </div>
@@ -88,6 +90,14 @@
 
 <script>
     $( document ).ready(function() {
+        let error_add = '<?= $this->session->userdata("error_image"); ?>';
+        if (error_add == "success") {
+            <?= $this->session->unset_userdata("error_image"); ?>
+            swal("สำเร็จ", "เพิ่มโหวตสำเร็จ", "success");
+        }else if (error_add == "fail"){
+            <?= $this->session->unset_userdata("error_image"); ?>
+            swal("ไม่สำเร็จ", "เพิ่มโหวตไม่สำเร็จ", "error");
+        }
         preview_image();
     });
 
@@ -102,7 +112,6 @@
      */
     function show_modal_add_vote() {
         $('#modal_add_vote').modal();
-
     }
 
     /*  

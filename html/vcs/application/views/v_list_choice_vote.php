@@ -195,7 +195,7 @@ function vote_modal(id, name) {
             $('#score_vote').val('');
         } else if (score > <?= $this->session->userdata("use_point") ?>) {
             console.log(3);
-            $('#submit').prop('disabled', true);
+            $('#submit').prop('disabled', false);
             $('#score_vote').val(<?= $this->session->userdata("use_point") ?>);
         }
     });
@@ -320,9 +320,11 @@ function delete_choice_vote(cho_id) {
         data: {
             cho_id: cho_id
         },
-        url: '<?php echo site_url() . 'index.php/User/delete_choice_vote_ajax/' ?>',
+        url: '<?php echo base_url() . '/User/delete_choice_vote_ajax/' ?>',
         success: function() {
-            location.reload();
+            swal("สำเร็จ", "คุณได้ลบตัวเลือกโหวตเสร็จสิ้น", "success").then(function() {
+                location.reload();
+            });
         },
         error: function() {
             alert('ajax error working');

@@ -8,17 +8,16 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-
---
+-- -----------------------------------------------------
 -- Table structure for table `vcs_user`
---
+-- -----------------------------------------------------
 CREATE TABLE `vcs_user` (
   `use_id` int NOT NULL AUTO_INCREMENT COLLATE utf8_unicode_ci COMMENT 'ไอดีของ User', 
   `use_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT ' ชื่อของ User ',
   `use_username` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci COMMENT ' ชื่อผู้ใช้ของ User ',
   `use_password` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci COMMENT ' รหัสผ่านของ User ',
   `use_status` int NOT NULL COLLATE utf8_unicode_ci COMMENT ' สถานะของ User เช่น 1 = ผู้ใช้ทั่วไป, 2 = แอดมิน',
-  `use_point` int DEFAULT 0 COLLATE utf8_unicode_ci COMMENT ' คะเเนนที่สามารถโหวตได้ของ User ',
+  `use_point` int NOT NULL DEFAULT 0 COLLATE utf8_unicode_ci COMMENT ' คะแนนที่ใช้โหวต',
   PRIMARY KEY (`use_id`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -43,12 +42,13 @@ CREATE TABLE `vcs_vote` (
 CREATE TABLE `vcs_choice_vote` (
   `cho_id` int NOT NULL AUTO_INCREMENT COLLATE utf8_unicode_ci COMMENT 'ไอดีของ choice vote',
   `cho_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT 'ชื่อของ choice vote',
+  `cho_system_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT 'ชื่อระบบของ choice vote',
   `cho_score` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'คะเเนนของ choice vote',
   `cho_path` VARCHAR(150) NOT NULL COLLATE utf8_unicode_ci COMMENT 'รูปของ choice vote',
+  `cho_status` int NOT NULL DEFAULT 1 COLLATE utf8_unicode_ci COMMENT 'สถานะของ choice vote',
   `cho_vot_id` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'ไอดีของ Vote',
   PRIMARY KEY (`cho_id`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 -- -----------------------------------------------------
 -- Table `vcs_history_vote`
@@ -62,7 +62,6 @@ CREATE TABLE `vcs_history_vote` (
   PRIMARY KEY (`his_id`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
 --
 -- Constraints for table `vcs_choice_vote`
 --
@@ -75,3 +74,4 @@ ALTER TABLE `vcs_choice_vote`
 ALTER TABLE `vcs_history_vote`
   ADD CONSTRAINT `vcs_history_vote_ibfk_1` FOREIGN KEY (`his_cho_id`) REFERENCES `vcs_choice_vote` (`cho_id`),
   ADD CONSTRAINT `vcs_history_vote_ibfk_2` FOREIGN KEY (`his_use_id`) REFERENCES `vcs_user` (`use_id`);
+

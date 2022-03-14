@@ -14,6 +14,9 @@ class Da_vcs_choice_vote extends VCS_model
     public $cho_name;
     public $cho_score;
     public $cho_vot_id;
+    public $cho_status;
+    public $cho_path;
+    public $cho_system_name;
 
     /*
     * @author Suwapat Saowarod 62160340
@@ -48,8 +51,9 @@ class Da_vcs_choice_vote extends VCS_model
     */
     public function delete_choice_vote()
     {
-        $sql = "DELETE FROM `vcs_choice_vote` 
-				WHERE cho_id=?";
+        $sql = "UPDATE `vcs_choice_vote` SET 
+                    `cho_status`=2
+                WHERE cho_id = ?";
         $this->db->query($sql, array($this->cho_id));
     }
 
