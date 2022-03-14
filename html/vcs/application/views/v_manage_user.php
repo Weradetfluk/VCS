@@ -31,7 +31,7 @@
 
         <div class="row py-3" style="text-align: center">
             <div class="col">
-                <h4>ชื่อมกุล</h4>
+                <h4>ชื่อ</h4>
             </div>
             <!-- ชื่อมกุล -->
 
@@ -75,7 +75,7 @@
                     <!-- ชื่อผู้ใช้ -->
 
                     <div class="col">
-                        <p><?php echo $arr_user[$i]->use_password ?></p>
+                        <p>**********</p>
                     </div>
                     <!-- รหัสผ่าน -->
 
@@ -85,7 +85,9 @@
                     <!-- คะแนน -->
 
                     <div class="col">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_modal">แก้ไข</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                    data-target="#edit_modal"
+                    onclick="confirm_edit('<?php echo $arr_user[$i]->use_id ?>', '<?php echo $arr_user[$i]->use_name ?>','<?php echo $arr_user[$i]->use_username ?>','<?php echo $arr_user[$i]->use_password ?>','<?php echo $arr_user[$i]->use_point ?>')">แก้ไข</button>
                         <button type="button" class="btn btn-danger" onclick="confirm_delete('<?php echo $arr_user[$i]->use_name ?>', <?php echo $arr_user[$i]->use_id ?>)">ลบ</button>
                     </div>
                     <!-- ปุ่มจัดการ -->
@@ -138,7 +140,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row py-2">
-                            <label class="low-lebel">ชื่อมกุล</label>
+                            <label class="low-lebel">ชื่อ</label>
                             <input type="text" class="form-control" id="use_name" name="use_name" placeholder="ใส่ชื่อมกุล">
                         </div>
                         <!-- ชื่อมกุล -->
@@ -187,31 +189,35 @@
             </div>
             <!-- ส่วนหัว -->
 
-            <form method='POST' action='<?php echo base_url('VCS_controller/update_user_information') ?>'>
-                <div class="modal-body">
+            <form method='POST' action="<?php echo base_url('VCS_controller/update_user_information') ?>">
+                <div class="modal-body edit">
                     <div class="container">
                         <div class="row py-2">
-                            <label class="low-lebel">ชื่อมกุล</label>
-                            <input type="text" class="form-control" id="use_name" name="use_name" placeholder="ใส่ชื่อมกุล">
-                            <!-- value="<?php echo $arr_user[$i]->use_name ?>" -->
+                        <input type="hidden" id="use_id" name="use_id" >
+                            <label class="low-lebel">ชื่อ</label>
+                            <input type="text" class="form-control" id="use_name" name="use_name"
+                                placeholder="ใส่ชื่อมกุล" >
                         </div>
                         <!-- ชื่อมกุล -->
 
                         <div class="row py-2">
                             <label class="low-lebel">ชื่อผู้ใช้</label>
-                            <input type="text" class="form-control" id="use_username" name="use_username" placeholder="ใส่ชื่อผู้ใช้">
+                            <input type="text" class="form-control" id="use_username" name="use_username"
+                                placeholder="ใส่ชื่อผู้ใช้">
                         </div>
                         <!-- ชื่อผู้ใช้ -->
 
                         <div class="row py-2">
                             <label class="low-lebel">รหัสผ่าน</label>
-                            <input type="text" class="form-control" id="use_password" name="use_password" placeholder="ใส่รหัสผ่าน">
+                            <input type="text" class="form-control" id="use_password" name="use_password"
+                                placeholder="ใส่รหัสผ่าน">
                         </div>
                         <!-- รหัสผ่าน -->
 
                         <div class="row py-2">
                             <label class="low-lebel">คะแนน</label>
-                            <input type="text" class="form-control" id="use_point" name="use_point" placeholder="ใส่คะแนน">
+                            <input type="number" min="0" class="form-control" id="use_point" name="use_point"
+                                placeholder="ใส่คะแนน">
                         </div>
                         <!-- คะแนน -->
 
@@ -220,7 +226,7 @@
                 <!-- ส่วนตัว -->
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">ยืนยัน</button>
+                    <button type="submit" class="btn btn-success" id="edit_btn">ยืนยัน</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
                 </div>
                 <!-- ส่วนหาง -->
@@ -299,4 +305,27 @@
             delete_user(use_id_con)
         });
     }
+
+/*
+ * edit modal user
+ * edit modal information user
+ * @input us_id
+ * @output -
+ * @author  Chutipon Thermsirisuksin
+ * @Create Date 2565-03-14
+ * @Update -
+ */
+function confirm_edit(use_id,use_name, use_username,use_password,use_point) {
+
+
+$(".edit #use_id").val( use_id );
+$(".edit #use_name").val( use_name );
+$(".edit #use_username").val( use_username );
+$(".edit #use_password").val( use_password );
+$(".edit #use_point").val( use_point );
+
+
+
+$('#edit_modal').modal();
+}
 </script>
