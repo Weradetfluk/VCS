@@ -200,7 +200,8 @@
                         <div class="row py-2">
                             <label class="low-lebel">ชื่อมกุล</label>
                             <input type="text" class="form-control" id="use_name" name="use_name"
-                                placeholder="ใส่ชื่อมกุล" value="<?php echo $arr_user[$i]->use_name ?>">
+                                placeholder="ใส่ชื่อมกุล" >
+                                <!-- value="<?php echo $arr_user[$i]->use_name ?>" -->
                         </div>
                         <!-- ชื่อมกุล -->
 
