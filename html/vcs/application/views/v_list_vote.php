@@ -22,6 +22,11 @@
         <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">
             <div class="container" style="width: 200px;">
                 <img src="<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>" class="card-img-top" style="width: 100%; height: 200px; object-fit: contain;">
+                <?php if ($arr_vote[$i]->vot_status == 2) { ?>
+                    <p id="msg-vote-open" style="color: green;"> เปิดการโหวต</p>
+                <?php } else { ?>
+                    <p id="msg-vote-close" style="color: red; font-weight:bold"> ปิดการโหวต</p>
+                <?php } ?>
             </div>
             <div class="card-body">
                 <center>
@@ -39,7 +44,7 @@
                         <a href="<?= base_url() . 'User/show_choice_vote_list/' . $arr_vote[$i]->vot_id; ?>" class="btn btn-info" style="width: 100%;">เลือก</a>
                     </div>
                 </div>
-                <?php if($this->session->userdata("use_status") == 2){?>
+                <?php if ($this->session->userdata("use_status") == 2) { ?>
                     <div class="row">
                         <div class="col px-1">
                             <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_vote()">
@@ -47,10 +52,25 @@
                             </button>
                         </div>
                         <div class="col px-1">
-                            <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_delete_vote(<?= $arr_vote[$i]->vot_id?>, '<?= $arr_vote[$i]->vot_name?>')"> ลบ </button>
+                            <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_delete_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')"> ลบ </button>
                         </div>
                     </div>
-                <?php }?>
+                    <hr>
+                    <?php if ($arr_vote[$i]->vot_status == 1) { ?>
+                        <div class="row">
+                            <div class="col px-1">
+                                <button class="btn btn-success" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')"> เปิดโหวต </button>
+                            </div>
+                        </div>
+                    <?php } else { ?>
+                        <div class="row">
+                            <div class="col px-1">
+                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')"> ปิดโหวต </button>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                <?php } ?>
             </div>
         </div>
     <?php } ?>
@@ -121,7 +141,40 @@
         </div>
     </div>
 </div>
-
+<!-- modal for open vote -->
+<div class="modal fade" id="open_vote_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน</h5>
+            </div>
+            <div class="modal-body">
+                คุณต้องการเปิดโหวต <span id="name_vote_opn"></span> ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="submit_opn" class="btn btn-success">ยืนยัน</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal for close vote -->
+<div class="modal fade" id="close_vote_modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน</h5>
+            </div>
+            <div class="modal-body">
+                คุณต้องการปิดโหวต <span id="name_vote_close"></span> ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="submit_close" class="btn btn-danger">ยืนยัน</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         let error_add = '<?= $this->session->userdata("error_image"); ?>';
@@ -204,14 +257,14 @@
     }
 
     /*
-    * delete_vote_ajax
-    * delete vote 
-    * @input id
-    * @output -
-    * @author Suwapat Saowarod 62160340
-    * @Create Date 2565-03-15
-    * @Update Date -
-    */
+     * delete_vote_ajax
+     * delete vote 
+     * @input id
+     * @output -
+     * @author Suwapat Saowarod 62160340
+     * @Create Date 2565-03-15
+     * @Update Date -
+     */
     function delete_vote_ajax(id) {
         console.log(id);
         $.ajax({
@@ -230,5 +283,68 @@
             }
         });
     }
+    /*
+     * show_modal_open_vote
+     * open modal vote 
+     * @input id, name
+     * @output -
+     * @author Nantasiri Saiwaew 62160093
+     * @Create Date 2565-03-15
+     * @Update Date -
+     */
+    function show_modal_open_vote(id, name) {
+        $('#name_vote_opn').html(name);
 
+        $('#open_vote_modal').modal();
+
+        $('#submit_opn').click(function() {
+            open_vote_ajax(id);
+        });
+    }
+
+    /*
+     * show_modal_close_vote
+     * close modal vote 
+     * @input id, name
+     * @output -
+     * @author Nantasiri Saiwaew 62160093
+     * @Create Date 2565-03-15
+     * @Update Date -
+     */
+    function show_modal_close_vote(id, name) {
+        $('#name_vote_close').html(name);
+
+        $('#close_vote_modal').modal();
+
+        $('#submit_close').click(function() {
+            update_vote_ajax(id);
+        });
+    }
+    /*
+     * update_vote_ajax
+     * open vote 
+     * @input id
+     * @output -
+     * @author Nantasiri Saiwaew 62160093
+     * @Create Date 2565-03-15
+     * @Update Date -
+     */
+    function update_vote_ajax(id) {
+        console.log(id);
+        $.ajax({
+            url: "<?php echo base_url() . "User/update_vote_ajax/" ?>",
+            method: "POST",
+            data: {
+                vot_id: id,
+            },
+            success: function(data) {
+                swal("แจ้งเตือน", "คุณได้ทำการโหวตเสร็จสิ้น", "success").then(function() {
+                    location.reload();
+                });
+            },
+            error: function() {
+                alert('ajax error working');
+            }
+        });
+    }
 </script>
