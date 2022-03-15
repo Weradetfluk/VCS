@@ -50,7 +50,7 @@
                 <?php if ($this->session->userdata("use_status") == 2) { ?>
                     <div class="row">
                         <div class="col px-1">
-                            <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_vote()">
+                            <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_vote('<?php echo $arr_vote[$i]->vot_id ?>', '<?php echo $arr_vote[$i]->vot_name ?>','<?php echo substr($arr_vote[$i]->vot_start_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_start_time, 11) ?>','<?php echo substr($arr_vote[$i]->vot_end_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_end_time, 11) ?>','<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>')">
                                 แก้ไข
                             </button>
                         </div>
@@ -123,6 +123,54 @@
                         </div>
                         <div class="form-group col-12">
                             <input type="file" name="vot_path" id="vot_path" accept="image/*" hidden required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" id="submit" class="btn btn-success">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- modal edit vote -->
+<div class="modal" tabindex="-1" id="modal_edit_vote">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">แก้ไขโหวต</h5>
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="modal-body edit">
+                    <div class="row" style="text-align: center; background-color: #F1F2F1;">
+                        <div class="container" style="width: 300px; height:auto;">
+                            <label for="vot_path" style="margin-top: 10px;">
+                                <img src="https://bit.ly/3ubuq5o" alt="" style="width: 100%; height: 200px; object-fit: cover;" id="image_vote">
+                                <div class="div-span-image" id="div_span_add">
+                                    <span style="font-size: 25px;" id="name_image">+</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <input type="hidden" id="id" name="id">
+                            <label for="name">ชื่อโหวต</label>
+                            <input class="form-control" type="text" id="name" name="name" placeholder="กรอกชื่อโหวต">
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="start_vote">วันที่เริ่มโหวต</label>
+                            <input class="form-control" type="datetime-local" id="start_vote" name="start_vote">
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="end_vote">วันที่สิ้นสุดโหวต</label>
+                            <input class="form-control" type="datetime-local" id="end_vote" name="end_vote">
+                        </div>
+                        <div class="form-group col-12">
+                            <input type="file" name="vot_path" id="vot_path" accept="image/*" hidden>
                         </div>
                     </div>
                 </div>
@@ -371,5 +419,25 @@
                 alert('ajax error working');
             }
         });
+    }
+
+    /*  
+     * show_modal_edit_vote
+     * show modal edit vote
+     * @input -
+     * @output -
+     * @author Suwapat Saowarod 62160340
+     * @Create Date 2565-03-12
+     * @Update by Naaka Punparich 62160082 
+     * @Update by Thanisorn thumsawanit 62160088
+     */
+    function show_modal_edit_vote(id, name, start, end, path) {
+        $(".edit #id").val(id);
+        $(".edit #name").val(name);
+        $(".edit #start_vote").val(start);
+        $(".edit #end_vote").val(end);
+        $(".edit #image_vote").attr("src", path);
+
+        $('#modal_edit_vote').modal();
     }
 </script>
