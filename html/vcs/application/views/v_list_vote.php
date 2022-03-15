@@ -22,11 +22,14 @@
         <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">
             <div class="container" style="width: 200px;">
                 <img src="<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>" class="card-img-top" style="width: 100%; height: 200px; object-fit: contain;">
-                <?php if ($arr_vote[$i]->vot_status == 2) { ?>
+                <!-- <? //php if ($arr_vote[$i]->vot_status == 2) { 
+                        ?>
                     <p id="msg-vote-open" style="color: green;"> เปิดการโหวต</p>
-                <?php } else { ?>
+                <? //php } else { 
+                ?>
                     <p id="msg-vote-close" style="color: red; font-weight:bold"> ปิดการโหวต</p>
-                <?php } ?>
+                <? //php } 
+                ?> -->
             </div>
             <div class="card-body">
                 <center>
@@ -59,13 +62,21 @@
                     <?php if ($arr_vote[$i]->vot_status == 1) { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-success" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')"> เปิดโหวต </button>
+                                <button class="btn btn-success" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                    เปิดโหวต
+                                    <!-- <span class="material-icons">
+                                        play_circle_outline
+                                    </span> </button> -->
                             </div>
                         </div>
                     <?php } else { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')"> ปิดโหวต </button>
+                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                    ปิดโหวต
+                                    <!-- <i class="material-icons">
+                                        stop
+                                </i></button> -->
                             </div>
                         </div>
                     <?php } ?>
@@ -298,7 +309,7 @@
         $('#open_vote_modal').modal();
 
         $('#submit_opn').click(function() {
-            open_vote_ajax(id);
+            update_status_vote_ajax(id, 2);
         });
     }
 
@@ -317,11 +328,11 @@
         $('#close_vote_modal').modal();
 
         $('#submit_close').click(function() {
-            update_vote_ajax(id);
+            update_status_vote_ajax(id, 1);
         });
     }
     /*
-     * update_vote_ajax
+     * update_status_vote_ajax
      * open vote 
      * @input id
      * @output -
@@ -329,16 +340,30 @@
      * @Create Date 2565-03-15
      * @Update Date -
      */
-    function update_vote_ajax(id) {
-        console.log(id);
+    function update_status_vote_ajax(id, status) {
+        // console.log(id);
         $.ajax({
-            url: "<?php echo base_url() . "User/update_vote_ajax/" ?>",
+            url: "<?php echo base_url() . "User/update_status_vote_ajax/" ?>",
             method: "POST",
             data: {
                 vot_id: id,
+                vot_status: status,
             },
             success: function(data) {
-                swal("แจ้งเตือน", "คุณได้ทำการโหวตเสร็จสิ้น", "success").then(function() {
+                var title = '';
+                var detail = '';
+                if (status == 1) {
+                    title = 'ปิดการโหวต';
+                    detail = 'คุณได้ทำการปิดการโหวตเสร็จสิ้น';
+                } else if (status == 2) {
+                    title = 'เปิดการโหวต';
+                    detail = 'คุณได้ทำการเปิดการโหวตเสร็จสิ้น';
+                }
+                swal({
+                    title: title,
+                    text: detail,
+                    type: "success"
+                }).then(function() {
                     location.reload();
                 });
             },

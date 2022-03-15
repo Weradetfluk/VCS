@@ -53,4 +53,20 @@ class Da_vcs_vote extends VCS_model{
                 WHERE vot_id = ?";
         $this->db->query($sql, array($this->vot_id));
     }
+
+    /*
+    * update_status_vote
+    * update vot_status 
+    * @input vot_id
+    * @output -
+    * @author Kasama Donwong 62160074
+    * @Create Date 2565-03-15
+    */
+    public function update_status_vote()
+    {
+        $sql = "UPDATE `vcs_vote` 
+				SET `vot_status`= ?
+				WHERE vot_id=?";
+        $this->db->query($sql, array($this->vot_status, $this->vot_id));
+    }
 }
