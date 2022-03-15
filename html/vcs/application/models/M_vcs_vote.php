@@ -17,9 +17,14 @@ class M_vcs_vote extends Da_vcs_vote{
     * @Create Date 2565-03-06
     * @Update Date -
     */
-    function get_vote_all()
-    {
-        $sql = "SELECT * from vcs_vote";
+    function get_vote_all($and)
+    {   
+        if($and != ''){
+            $sql = "SELECT * from vcs_vote WHERE $and";
+        }else{
+            $sql = "SELECT * from vcs_vote WHERE vot_status != 3";
+        }
+        
         $query = $this->db->query($sql);
         return $query->result();
     }

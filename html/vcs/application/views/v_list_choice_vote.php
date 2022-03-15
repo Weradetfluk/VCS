@@ -119,7 +119,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                <button id="submit" class="btn btn-success" disabled>ยืนยัน</button>
+                <button id="submit_vote" class="btn btn-success" disabled>ยืนยัน</button>
             </div>
         </div>
     </div>
@@ -188,19 +188,19 @@ function vote_modal(id, name) {
         var score = $('#score_vote').val();
         if (score > 0 && score <= <?= $this->session->userdata("use_point") ?>) {
             console.log(1);
-            $('#submit').prop('disabled', false);
+            $('#submit_vote').prop('disabled', false);
         } else if (score <= 0) {
             console.log(2);
-            $('#submit').prop('disabled', true);
+            $('#submit_vote').prop('disabled', true);
             $('#score_vote').val('');
         } else if (score > <?= $this->session->userdata("use_point") ?>) {
             console.log(3);
-            $('#submit').prop('disabled', false);
+            $('#submit_vote').prop('disabled', false);
             $('#score_vote').val(<?= $this->session->userdata("use_point") ?>);
         }
     });
 
-    $('#submit').click(function() {
+    $('#submit_vote').click(function() {
         vote_ajax(id, $('#score_vote').val());
     });
 }
@@ -216,7 +216,7 @@ function vote_modal(id, name) {
  */
 function vote_ajax(id, score) {
     var cho_score = $('#score_' + id).val();
-    $('#submit').prop('disabled', true);
+    $('#submit_vote').prop('disabled', true);
     // console.log(cho_score + ':' + id + ':' + score);
     $('#score_vote').val('');
 
@@ -303,7 +303,6 @@ function update_choice_vote(cho_id) {
         }
     });
 }
-
 
 /*
  * delete_choice_vote_ajax

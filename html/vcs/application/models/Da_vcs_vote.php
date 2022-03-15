@@ -27,14 +27,30 @@ class Da_vcs_vote extends VCS_model{
     /*
     * add_vote
     * Add Vote
-    * @input cho_name, cho_score, cho_vot_id
+    * @input vot_name, vot_start_time, vot_end_time, vot_path
     * @output 
-    * @author Priyarat Bumrungkit 62160156
-    * @Create Date 2565-03-12
+    * @author Suwapat Saowarod 62160340
+    * @Create Date 2565-03-14
     */
     public function add_vote()
     {
         $sql = "INSERT INTO `vcs_vote`(vot_name, vot_start_time, vot_end_time, vot_path, vot_status) VALUES(?, ?, ?, ?, 1)";
         $this->db->query($sql, array($this->vot_name, $this->vot_start_time, $this->vot_end_time, $this->vot_path));
+    }
+
+    /*
+    * delete_vote
+    * delete vote
+    * @input vot_id
+    * @output -
+    * @author Suwapat Saowarod 62160340
+    * @Create Date 2564-03-15
+    */
+    public function delete_vote()
+    {
+        $sql = "UPDATE `vcs_vote` SET 
+                    `vot_status`= 3
+                WHERE vot_id = ?";
+        $this->db->query($sql, array($this->vot_id));
     }
 }

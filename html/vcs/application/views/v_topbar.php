@@ -21,12 +21,15 @@ if (!$this->session->has_userdata("use_id")) {
   if($this->session->has_userdata("use_status")){
     if($this->session->userdata("use_status") == 2){?>
       <span class="navbar-text">
-        <a class="make-nav" href="<?php echo base_url().'User/show_vote_list'?>">จัดการผลโหวด</a>
+        <a class="make-nav" href="<?php echo base_url().'User/show_vote_list'?>">จัดการโหวด</a>
         <a class="make-nav" href="<?php echo base_url().'VCS_controller/show_manage_user_page'?>">จัดการผู้ใช้งาน</a>
         <a class="make-nav" href="<?php echo base_url().'Dashboard_score/show_dasbord_score_page/1'?>">ดูผลโหวด</a>
       </span>
+    <?php }
+    if($this->session->userdata("use_status") == 1){?>
+      <span  class="navbar-brand mb-0 h1" style="background-color: white; color:black; border-radius: 10px;padding: 0px 10px;">คะแนนที่มี <?php echo $this->session->userdata("use_point")?></span>
     <?php }?>
+    
     <a class="btn btn-outline-danger" href="<?= base_url() . 'VCS_controller/logout'?>">Logout</a>
-    <!-- <a class="make-nav" href="<?= base_url() . 'VCS_controller/logout'?>">Logout</a> -->
   <?php }?>
 </nav>

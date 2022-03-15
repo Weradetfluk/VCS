@@ -28,7 +28,7 @@ CREATE TABLE `vcs_user` (
 CREATE TABLE `vcs_vote` (
   `vot_id` int NOT NULL AUTO_INCREMENT COLLATE utf8_unicode_ci COMMENT 'ไอดีของ Vote',
   `vot_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT 'ชื่อของ Vote',
-  `vot_status` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'สถานะของ Vote เช่น 1 = ปิด, 2 = เปิด',
+  `vot_status` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'สถานะของ Vote เช่น 1 = ปิด, 2 = เปิด, 3 = ลบ',
   `vot_start_time` DATETIME NOT NULL COLLATE utf8_unicode_ci COMMENT 'เวลาเริ่มโหวตของ Vote',
   `vot_end_time` DATETIME NOT NULL COLLATE utf8_unicode_ci COMMENT 'เวลาปิดโหวตของ Vote',
   `vot_path` VARCHAR(150) NOT NULL COLLATE utf8_unicode_ci COMMENT 'รูปของ vote',
@@ -45,7 +45,7 @@ CREATE TABLE `vcs_choice_vote` (
   `cho_system_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT 'ชื่อระบบของ choice vote',
   `cho_score` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'คะเเนนของ choice vote',
   `cho_path` VARCHAR(150) NOT NULL COLLATE utf8_unicode_ci COMMENT 'รูปของ choice vote',
-  `cho_status` int NOT NULL DEFAULT 1 COLLATE utf8_unicode_ci COMMENT 'สถานะของ choice vote',
+  `cho_status` int NOT NULL DEFAULT 1 COLLATE utf8_unicode_ci COMMENT 'สถานะของ choice vote 1 = ไม่ถูกลบ, 2 = ถูกลบ',
   `cho_vot_id` int NOT NULL COLLATE utf8_unicode_ci COMMENT 'ไอดีของ Vote',
   PRIMARY KEY (`cho_id`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

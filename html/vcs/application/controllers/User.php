@@ -28,7 +28,14 @@ class User extends VCS_controller
 	public function show_vote_list()
 	{
 		$this->load->model('M_vcs_vote', 'vvot');
-		$data['arr_vote'] = $this->vvot->get_vote_all();
+		date_default_timezone_set('Asia/Bangkok');
+		$date_now = date("Y-m-d H:i:s");
+		if($this->session->userdata("use_status") == 1){
+			$and = "('" .  $date_now . "' between vot_start_time AND vot_end_time) AND vot_status = 2";
+		}else{
+			$and = '';
+		}
+		$data['arr_vote'] = $this->vvot->get_vote_all($and);
 		$this->output('v_list_vote', $data);
 	}
 
@@ -104,6 +111,22 @@ class User extends VCS_controller
 	}
 
 	/*
+    * delete_vote_ajax
+    * delete vote
+    * @input vot_id
+    * @output -
+    * @author Thanisorn thumsawanit 62160088
+    * @Create Date 2565-03-12
+    * @Update -
+    */
+	public function delete_vote_ajax()
+	{
+		$this->load->model('/M_vcs_vote', 'mvot');
+		$this->mvot->vot_id = $this->input->post('vot_id');
+		$this->mvot->delete_vote();
+	}
+
+	/*
     * update_choice_vote_ajax
     * update choice vote
     * @input cho_id,choice_name,choice_score
@@ -161,10 +184,6 @@ class User extends VCS_controller
         $file_size = $_FILES['vot_path']['size'] ?? '';
         $file_error = $_FILES['vot_path']['error'] ?? '';
 		$error_image = '';
-		// print_r($file);
-		// echo $this->mvot->vot_name;
-		// echo $this->mvot->vot_start_time;
-		// echo $this->mvot->vot_end_time;
 		if(isset($file)){
 			$file_ext = explode('.', $file_name); // เเยก string ให้เป็น array โดยใช้ ' . ' ในการแยก
 
@@ -184,12 +203,10 @@ class User extends VCS_controller
 			
 			// ใส่ directory ที่จะเก็บ ลงในตัวแปร file_destination
 			$file_destination = './image_vote/' . $file_new_name . '.' . $file_actaul_ext; 
-			// echo $file_destination;
 			move_uploaded_file($file_tmp_name, $file_destination); // เก็บไฟล์ลง floder ที่ชื่อว่า image_vote
 			
 			// สร้าง path รูปภาพเพื่อเข้าถึงภาพที่พึ่งเก็บ
 			$this->mvot->vot_path = $file_new_name . '.' . $file_actaul_ext;
-			// echo $this->mvot->vot_path ;
 			$this->mvot->add_vote();
 			$this->session->set_userdata("error_image", 'success');
         }else{

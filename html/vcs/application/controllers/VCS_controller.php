@@ -88,11 +88,8 @@ class VCS_controller extends CI_Controller
 			$this->session->set_userdata("use_name", $check_login->use_name);
 			$this->session->set_userdata("use_status", $check_login->use_status);
 			$this->session->set_userdata("use_point", $check_login->use_point);
-			if ($this->session->userdata("use_status") == 1) {
-				redirect('User/show_vote_list');
-			} else {
-				$this->show_manage_user_page();
-			}
+			
+			redirect('User/show_vote_list');
 		} else {
 			$data['login_fail'] = 'ชื่อผู้ใช้หรือรหัสผ่านของคุณไม่ถูกต้อง';
 			$this->load->view('v_header');
