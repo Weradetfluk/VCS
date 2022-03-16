@@ -50,7 +50,7 @@
                 <?php if ($this->session->userdata("use_status") == 2) { ?>
                     <div class="row">
                         <div class="col px-1">
-                            <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_vote('<?php echo $arr_vote[$i]->vot_id ?>', '<?php echo $arr_vote[$i]->vot_name ?>','<?php echo substr($arr_vote[$i]->vot_start_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_start_time, 11) ?>','<?php echo substr($arr_vote[$i]->vot_end_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_end_time, 11) ?>','<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>')">
+                            <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_vote('<?php echo $arr_vote[$i]->vot_id ?>', '<?php echo $arr_vote[$i]->vot_name ?>','<?php echo substr($arr_vote[$i]->vot_start_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_start_time, 11, 5) ?>','<?php echo substr($arr_vote[$i]->vot_end_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_end_time, 11, 5) ?>','<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>')">
                                 แก้ไข
                             </button>
                         </div>
@@ -142,13 +142,13 @@
             <div class="modal-header">
                 <h5 class="modal-title">แก้ไขโหวต</h5>
             </div>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() . "User/edit_vote/" ?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-body edit">
                     <div class="row" style="text-align: center; background-color: #F1F2F1;">
                         <div class="container" style="width: 300px; height:auto;">
-                            <label for="vot_path" style="margin-top: 10px;">
-                                <img src="https://bit.ly/3ubuq5o" alt="" style="width: 100%; height: 200px; object-fit: cover;" id="image_vote">
-                                <div class="div-span-image" id="div_span_add">
+                            <label for="vot_path_edit" style="margin-top: 10px;">
+                                <img src="https://bit.ly/3ubuq5o" alt="" style="width: 100%; height: 200px; object-fit: cover;" id="image_vote_edit">
+                                <div class="div-span-image" id="div_span_edit">
                                     <span style="font-size: 25px;" id="name_image">+</span>
                                 </div>
                             </label>
@@ -170,7 +170,7 @@
                             <input class="form-control" type="datetime-local" id="end_vote" name="end_vote">
                         </div>
                         <div class="form-group col-12">
-                            <input type="file" name="vot_path" id="vot_path" accept="image/*" hidden>
+                            <input type="file" name="vot_path_edit" id="vot_path_edit" accept="image/*" hidden>
                         </div>
                     </div>
                 </div>
@@ -200,6 +200,7 @@
         </div>
     </div>
 </div>
+
 <!-- modal for open vote -->
 <div class="modal fade" id="open_vote_modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -217,6 +218,7 @@
         </div>
     </div>
 </div>
+
 <!-- modal for close vote -->
 <div class="modal fade" id="close_vote_modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -234,17 +236,37 @@
         </div>
     </div>
 </div>
+
 <script>
+    /*  
+     * @author Suwapat Saowarod 62160340
+     * @Create Date 2565-03-12
+     * @Update by Naaka Punparich 62160082
+     * @Update Date 2565-03-16
+     */
     $(document).ready(function() {
-        let error_add = '<?= $this->session->userdata("error_image"); ?>';
+        let error_add = '<?= $this->session->userdata("add_error_image"); ?>';
+        let error_edit = '<?= $this->session->userdata("edit_error_image"); ?>';
         if (error_add == "success") {
-            <?= $this->session->unset_userdata("error_image"); ?>
+            <?= $this->session->unset_userdata("add_error_image"); ?>
             swal("สำเร็จ", "เพิ่มโหวตสำเร็จ", "success");
+
         } else if (error_add == "fail") {
-            <?= $this->session->unset_userdata("error_image"); ?>
+            <?= $this->session->unset_userdata("add_error_image"); ?>
             swal("ไม่สำเร็จ", "เพิ่มโหวตไม่สำเร็จ", "error");
+
         }
         preview_image_add();
+
+        if (error_edit == "success") {
+            <?= $this->session->unset_userdata("edit_error_image"); ?>
+            swal("สำเร็จ", "แก้ไขโหวตสำเร็จ", "error");
+
+        } else if (error_edit == "fail") {
+            <?= $this->session->unset_userdata("edit_error_image"); ?>
+            swal("ไม่สำเร็จ", "แก้ไขโหวตไม่สำเร็จ", "error");
+        }
+        preview_image_edit();
     });
 
     /*  
@@ -436,8 +458,32 @@
         $(".edit #name").val(name);
         $(".edit #start_vote").val(start);
         $(".edit #end_vote").val(end);
-        $(".edit #image_vote").attr("src", path);
+        $(".edit #image_vote_edit").attr("src", path);
+        // $(".edit #vot_path_edit").attr("src", path);
 
         $('#modal_edit_vote').modal();
+    }
+
+    /*  
+     * preview_image_edit
+     * preview image edit
+     * @input - 
+     * @output -
+     * @author Naaka Punparich 62160082
+     * @Create Date 2565-03-14
+     * @Update -
+     */
+    function preview_image_edit() {
+        document.querySelector("#vot_path_edit").addEventListener("change", function(e) {
+            if (e.target.files.length == 0) {
+                document.querySelector("#div_span_edit").style.display = "block";
+                document.querySelector("#image_vote_edit").src = 'https://bit.ly/3ubuq5o';
+                return;
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("#div_span_edit").style.display = "none";
+            document.querySelector("#image_vote_edit").src = url;
+        });
     }
 </script>

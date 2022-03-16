@@ -6,11 +6,12 @@
 * @Create Date 2565-03-06
 */
 defined('BASEPATH') or exit('No direct script access allowed');
-include_once dirname(__FILE__) ."/VCS_model.php";
-class Da_vcs_vote extends VCS_model{
-	
-	public $vot_id;
-	public $vot_name;
+include_once dirname(__FILE__) . "/VCS_model.php";
+class Da_vcs_vote extends VCS_model
+{
+
+    public $vot_id;
+    public $vot_name;
     public $vot_status;
     public $vot_start_time;
     public $vot_end_time;
@@ -68,5 +69,21 @@ class Da_vcs_vote extends VCS_model{
 				SET `vot_status`= ?
 				WHERE vot_id=?";
         $this->db->query($sql, array($this->vot_status, $this->vot_id));
+    }
+
+    /*
+    * edit_vote
+    * edit Vote
+    * @input vot_name, vot_start_time, vot_end_time, vot_path
+    * @output 
+    * @author Suwapat Saowarod 62160340
+    * @Create Date 2565-03-14
+    */
+    public function edit_vote()
+    {
+        $sql = "UPDATE vcs_vote
+                SET vot_name = ?, vot_start_time = ?, vot_end_time = ?, vot_path = ?, vot_status = ?
+                WHERE vot_id = ?";
+        $this->db->query($sql, array($this->vot_name, $this->vot_start_time, $this->vot_end_time, $this->vot_path, $this->status, $this->vot_id));
     }
 }
