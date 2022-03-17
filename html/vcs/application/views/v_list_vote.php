@@ -62,21 +62,23 @@
                     <?php if ($arr_vote[$i]->vot_status == 1) { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-success" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    เปิดโหวต
-                                    <!-- <span class="material-icons">
-                                        play_circle_outline
-                                    </span> </button> -->
+                                <button class="btn btn-outline-danger" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                    <!-- เปิดโหวต -->
+                                    <i class="material-icons" style="font-size: 30px; color:danger;">
+                                        toggle_off
+                                    </i>
+                                </button>
                             </div>
                         </div>
                     <?php } else { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    ปิดโหวต
-                                    <!-- <i class="material-icons">
-                                        stop
-                                </i></button> -->
+                                <button class="btn btn-outline-success" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                    <!-- ปิดโหวต -->
+                                    <i class="material-icons" style="font-size: 30px; color:success;">
+                                        toggle_on
+                                    </i>
+                                </button>
                             </div>
                         </div>
                     <?php } ?>
