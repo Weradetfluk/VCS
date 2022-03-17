@@ -62,23 +62,21 @@
                     <?php if ($arr_vote[$i]->vot_status == 1) { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-outline-danger" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    <!-- เปิดโหวต -->
-                                    <i class="material-icons" style="font-size: 30px; color:danger;">
-                                        toggle_off
-                                    </i>
-                                </button>
+                                <button class="btn btn-success" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                    เปิดโหวต
+                                    <!-- <span class="material-icons">
+                                        play_circle_outline
+                                    </span> </button> -->
                             </div>
                         </div>
                     <?php } else { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-outline-success" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    <!-- ปิดโหวต -->
-                                    <i class="material-icons" style="font-size: 30px; color:success;">
-                                        toggle_on
-                                    </i>
-                                </button>
+                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>', '<?= $arr_vote[$i]->vot_start_time ?>', '<?= $arr_vote[$i]->vot_end_time ?>)">
+                                    ปิดโหวต
+                                    <!-- <i class="material-icons">
+                                        stop
+                                </i></button> -->
                             </div>
                         </div>
                     <?php } ?>
@@ -174,6 +172,7 @@
                         <div class="form-group col-12">
                             <input type="file" name="vot_path_edit" id="vot_path_edit" accept="image/*" hidden>
                         </div>
+                        <input type="hidden" name="vot_path_old" id="vot_path_old">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -262,7 +261,7 @@
 
         if (error_edit == "success") {
             <?= $this->session->unset_userdata("edit_error_image"); ?>
-            swal("สำเร็จ", "แก้ไขโหวตสำเร็จ", "error");
+            swal("สำเร็จ", "แก้ไขโหวตสำเร็จ", "success");
 
         } else if (error_edit == "fail") {
             <?= $this->session->unset_userdata("edit_error_image"); ?>
@@ -293,9 +292,9 @@
      * @Create Date 2565-03-12
      * @Update -
      */
-    function show_modal_edit_vote() {
-        $('#modal_edit_vote').modal();
-    }
+    // function show_modal_edit_vote() {
+    //     $('#modal_edit_vote').modal();
+    // }
 
     /*  
      * preview_image_add
@@ -461,8 +460,9 @@
         $(".edit #start_vote").val(start);
         $(".edit #end_vote").val(end);
         $(".edit #image_vote_edit").attr("src", path);
-        // $(".edit #vot_path_edit").attr("src", path);
-
+        let result_path = path.split("/");
+        $("#vot_path_old").val(result_path[result_path.length - 1]);
+        console.log(result_path[result_path.length - 1]);
         $('#modal_edit_vote').modal();
     }
 

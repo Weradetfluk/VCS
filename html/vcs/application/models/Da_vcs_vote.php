@@ -82,8 +82,22 @@ class Da_vcs_vote extends VCS_model
     public function edit_vote()
     {
         $sql = "UPDATE vcs_vote
-                SET vot_name = ?, vot_start_time = ?, vot_end_time = ?, vot_path = ?, vot_status = ?
+                SET vot_name = ?, vot_start_time = ?, vot_end_time = ?, vot_path = ?
                 WHERE vot_id = ?";
-        $this->db->query($sql, array($this->vot_name, $this->vot_start_time, $this->vot_end_time, $this->vot_path, $this->status, $this->vot_id));
+        $this->db->query($sql, array($this->vot_name, $this->vot_start_time, $this->vot_end_time, $this->vot_path, $this->vot_id));
     }
+
+    /*
+    * delete_image_vote
+    * delete image vote
+    * @input vot_path
+    * @output -
+    * @author Thanisorn thumsawanit 62160088
+    * @Create Date 2565-03-16
+    * @Update Date -
+    */
+	public function delete_image_vote(){
+		$sql = "DELETE FROM `vcs_vote` WHERE vot_path = ?";
+		$this->db->query($sql, array($this->vot_path));
+	}
 }

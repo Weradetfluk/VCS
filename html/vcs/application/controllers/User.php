@@ -246,7 +246,6 @@ class User extends VCS_controller
 		$this->mvot->vot_name = $this->input->post('name');
 		$this->mvot->vot_start_time = $this->input->post('start_vote');
 		$this->mvot->vot_end_time = $this->input->post('end_vote');
-		$this->mvot->vot_status = 1;
 
 		$file = $_FILES['vot_path_edit'] ?? '';
 		$file_name = $_FILES['vot_path_edit']['name'] ?? '';
@@ -267,18 +266,18 @@ class User extends VCS_controller
 		} else {
 			$error_image = 'false';
 		}
-		print_r($file);
-		echo '<br>file_name: ' . $file_name;
-		echo '<br>file_tmp_name: ' . $file_tmp_name;
-		echo '<br>file_size: ' . $file_size;
-		echo '<br>file_error: ' . $file_error;
-		echo '<br>error_image: ' . $error_image;
+		// print_r($file);
+		// echo '<br>file_name: ' . $file_name;
+		// echo '<br>file_tmp_name: ' . $file_tmp_name;
+		// echo '<br>file_size: ' . $file_size;
+		// echo '<br>file_error: ' . $file_error;
+		// echo '<br>error_image: ' . $error_image;
 
-		echo '<br>vot_id: ' . $this->mvot->vot_id;
-		echo '<br>vot_name: ' . $this->mvot->vot_name;
-		echo '<br>vot_start_time: ' . $this->mvot->vot_start_time;
-		echo '<br>vot_end_time: ' . $this->mvot->vot_end_time;
-		echo '<br>vot_status: ' . $this->mvot->vot_status;
+		// echo '<br>vot_id: ' . $this->mvot->vot_id;
+		// echo '<br>vot_name: ' . $this->mvot->vot_name;
+		// echo '<br>vot_start_time: ' . $this->mvot->vot_start_time;
+		// echo '<br>vot_end_time: ' . $this->mvot->vot_end_time;
+		// echo '<br>vot_status: ' . $this->mvot->vot_status;
 
 		if ($error_image != 'false') {
 			$file_new_name = uniqid('', true); // uniqid เอาไว้สร้าง id แบบสุ่ม 23 ตัวอักษร
@@ -289,15 +288,28 @@ class User extends VCS_controller
 
 			// สร้าง path รูปภาพเพื่อเข้าถึงภาพที่พึ่งเก็บ
 			$this->mvot->vot_path = $file_new_name . '.' . $file_actaul_ext;
-
-			echo '<br>vot_path: ' . $this->mvot->vot_path;
+			// echo '<br>vot_path: ' . $this->mvot->vot_path;
 
 			$this->mvot->edit_vote();
+			//$arr_img_delete_old = array();
+			$arr_img_delete_old = $this->input->post('vot_path_old');
+			if($arr_img_delete_old != ''){
+					$this->mvot->vot_path = $arr_img_delete_old;
+					unlink('./image_vote/' . $arr_img_delete_old);
+					$this->mvot->delete_image_vote();	
+			}
 			$this->session->set_userdata("edit_error_image", 'success');
+			redirect('User/show_vote_list');
+		} else if (isset($_FILES["vot_path_edit"]) && empty($_FILES["vot_path_edit"]["name"])) {
+			$this->session->set_userdata("edit_error_image", 'success');
+			$this->mvot->vot_path = $this->input->post('vot_path_old');
+			$this->mvot->edit_vote();			
+			redirect('User/show_vote_list');
 		} else {
 			$this->session->set_userdata("edit_error_image", 'fail');
+			redirect('User/show_vote_list');
 		}
-		redirect('User/edit_vote');
-		// redirect('User/show_vote_list');
+
+		//redirect('User/edit_vote');
 	}
 }
