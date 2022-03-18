@@ -157,10 +157,45 @@ class User extends VCS_controller
 	{
 		$this->load->model('/M_vcs_choice_vote', 'mcho');
 		$this->mcho->cho_name = $this->input->post('cho_name');
-		$this->mcho->cho_score = $this->input->post('cho_score');
+		$this->mcho->cho_system_name = $this->input->post('cho_system_name');
 		$this->mcho->cho_vot_id = $this->input->post('vot_id');
-		$this->mcho->add_choice_vote();
-		$this->show_choice_vote_list($this->input->post('vot_id'));
+
+		$file = $_FILES['cho_path'] ?? '';
+		$file_name = $_FILES['cho_path']['name'] ?? '';
+		$file_tmp_name = $_FILES['cho_path']['tmp_name'] ?? '';
+		$file_size = $_FILES['cho_path']['size'] ?? '';
+		$file_error = $_FILES['cho_path']['error'] ?? '';
+		$error_image = '';
+		if (isset($file)) {
+			$file_ext = explode('.', $file_name); // เเยก string ให้เป็น array โดยใช้ ' . ' ในการแยก
+
+			// end() จะดึงค่าสุดท้ายของ array จากนั้นนำมาทำเป็นตัวอักษรพิมพ์เล็ก ด้วยคำสั่ง strtolower()
+			$file_actaul_ext = strtolower(end($file_ext));
+
+			// เช็คว่าไฟล์นั้นมีปัญหาหรือไม่ และรูปขนาดเกิน 30000000 KB หรือไม่
+			if ($file_error != 0 || $file_size >= 3000000) {
+				$error_image = 'false';
+			}
+		} else {
+			$error_image = 'false';
+		}
+
+		if ($error_image != 'false') {
+			$file_new_name = uniqid('', true); // uniqid เอาไว้สร้าง id แบบสุ่ม 23 ตัวอักษร
+
+			// ใส่ directory ที่จะเก็บ ลงในตัวแปร file_destination
+			$file_destination = './image_choice_vote/' . $file_new_name . '.' . $file_actaul_ext;
+			move_uploaded_file($file_tmp_name, $file_destination); // เก็บไฟล์ลง floder ที่ชื่อว่า image_choice_vote
+
+			// สร้าง path รูปภาพเพื่อเข้าถึงภาพที่พึ่งเก็บ
+			$this->mcho->cho_path = $file_new_name . '.' . $file_actaul_ext;
+			$this->mcho->add_choice_vote();
+			$this->session->set_userdata("add_error_image", 'success');
+		} else {
+			$this->session->set_userdata("add_error_image", 'fail');
+		}
+		// $this->show_choice_vote_list($this->input->post('vot_id'));
+		redirect('User/show_choice_vote_list/'.$this->input->post('vot_id'));
 	}
 
 	/*

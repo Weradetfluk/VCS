@@ -77,7 +77,7 @@ class Da_vcs_choice_vote extends VCS_model
     */
     public function add_choice_vote()
     {
-        $sql = "INSERT INTO vcs_choice_vote(cho_name, cho_score, cho_vot_id) VALUES(?, ?, ?)";
-        $this->db->query($sql, array($this->cho_name, $this->cho_score, $this->cho_vot_id));
+        $sql = "INSERT INTO vcs_choice_vote(cho_name, cho_system_name, cho_vot_id, cho_score, cho_status, cho_path) VALUES(?, ?, ?, 0, 1, ?)";
+        $this->db->query($sql, array($this->cho_name, $this->cho_system_name, $this->cho_vot_id, $this->cho_path));
     }
 }
