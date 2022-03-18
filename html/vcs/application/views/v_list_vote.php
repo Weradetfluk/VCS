@@ -20,16 +20,8 @@
 <div class="row">
     <?php for ($i = 0; $i < count($arr_vote); $i++) { ?>
         <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">
-            <div class="container" style="width: 200px;">
+            <div class="container " style="width: 200px;">
                 <img src="<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>" class="card-img-top" style="width: 100%; height: 200px; object-fit: contain;">
-                <!-- <? //php if ($arr_vote[$i]->vot_status == 2) { 
-                        ?>
-                    <p id="msg-vote-open" style="color: green;"> เปิดการโหวต</p>
-                <? //php } else { 
-                ?>
-                    <p id="msg-vote-close" style="color: red; font-weight:bold"> ปิดการโหวต</p>
-                <? //php } 
-                ?> -->
             </div>
             <div class="card-body">
                 <center>
@@ -44,7 +36,7 @@
                 </p>
                 <div class="row" style="padding: 0px 0px 10px 0px;">
                     <div class="col px-1">
-                        <a href="<?= base_url() . 'User/show_choice_vote_list/' . $arr_vote[$i]->vot_id; ?>" class="btn btn-info" style="width: 100%;">เลือก</a>
+                        <a href="<?= base_url() . 'Choice_vote/show_choice_vote_list/' . $arr_vote[$i]->vot_id; ?>" class="btn btn-info" style="width: 100%;">เลือก</a>
                     </div>
                 </div>
                 <?php if ($this->session->userdata("use_status") == 2) { ?>
@@ -72,7 +64,7 @@
                     <?php } else { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>', '<?= $arr_vote[$i]->vot_start_time ?>', '<?= $arr_vote[$i]->vot_end_time ?>)">
+                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
                                     ปิดโหวต
                                     <!-- <i class="material-icons">
                                         stop
@@ -95,7 +87,7 @@
             <div class="modal-header">
                 <h5 class="modal-title">เพิ่มโหวต</h5>
             </div>
-            <form action="<?php echo base_url() . "User/add_vote/" ?>" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() . "Vote/add_vote/" ?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row" style="text-align: center; background-color: #F1F2F1;">
                         <div class="container" style="width: 300px; height:auto;">
@@ -142,7 +134,7 @@
             <div class="modal-header">
                 <h5 class="modal-title">แก้ไขโหวต</h5>
             </div>
-            <form action="<?php echo base_url() . "User/edit_vote/" ?>" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() . "Vote/edit_vote/" ?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-body edit">
                     <div class="row" style="text-align: center; background-color: #F1F2F1;">
                         <div class="container" style="width: 300px; height:auto;">
@@ -245,7 +237,8 @@
      * @Update by Naaka Punparich 62160082
      * @Update Date 2565-03-16
      */
-    $(document).ready(function() {
+
+    $( document ).ready(function() {
         let error_add = '<?= $this->session->userdata("add_error_image"); ?>';
         let error_edit = '<?= $this->session->userdata("edit_error_image"); ?>';
         if (error_add == "success") {
@@ -269,6 +262,7 @@
         }
         preview_image_edit();
     });
+
 
     /*  
      * show_modal_add_vote
@@ -350,7 +344,7 @@
     function delete_vote_ajax(id) {
         console.log(id);
         $.ajax({
-            url: "<?php echo base_url() . "User/delete_vote_ajax/" ?>",
+            url: "<?php echo base_url() . "vote/delete_vote_ajax/" ?>",
             method: "POST",
             data: {
                 vot_id: id,
@@ -414,7 +408,7 @@
     function update_status_vote_ajax(id, status) {
         // console.log(id);
         $.ajax({
-            url: "<?php echo base_url() . "User/update_status_vote_ajax/" ?>",
+            url: "<?php echo base_url() . "Vote/update_status_vote_ajax/" ?>",
             method: "POST",
             data: {
                 vot_id: id,
@@ -430,11 +424,7 @@
                     title = 'เปิดการโหวต';
                     detail = 'คุณได้ทำการเปิดการโหวตเสร็จสิ้น';
                 }
-                swal({
-                    title: title,
-                    text: detail,
-                    type: "success"
-                }).then(function() {
+                swal(title, detail, "success").then(function() {
                     location.reload();
                 });
             },

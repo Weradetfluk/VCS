@@ -21,8 +21,8 @@ if (!$this->session->has_userdata("use_id")) {
   if($this->session->has_userdata("use_status")){
     if($this->session->userdata("use_status") == 2){?>
       <span class="navbar-text">
-        <a class="make-nav" href="<?php echo base_url().'User/show_vote_list'?>">จัดการโหวด</a>
-        <a class="make-nav" href="<?php echo base_url().'VCS_controller/show_manage_user_page'?>">จัดการผู้ใช้งาน</a>
+        <a class="make-nav" href="<?php echo base_url().'Vote/show_vote_list'?>">จัดการโหวด</a>
+        <a class="make-nav" href="<?php echo base_url().'User/show_manage_user_page'?>">จัดการผู้ใช้งาน</a>
         <a class="make-nav" href="<?php echo base_url().'Dashboard_score/show_dasbord_score_page/1'?>">ดูผลโหวด</a>
       </span>
     <?php }

@@ -154,7 +154,7 @@
             <div class="modal-header">
                 <h5 class="modal-title">เพิ่มตัวเลือกการโหวต</h5>
             </div>
-            <form action="<?php echo base_url() . "User/add_choice_vote/" ?>" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url() . "Choice_vote/add_choice_vote/" ?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row" style="text-align: center; background-color: #F1F2F1;">
                         <div class="container" style="width: 300px; height:auto;">
@@ -266,7 +266,7 @@ function vote_ajax(id, score) {
     $('#score_vote').val('');
 
     $.ajax({
-        url: "<?php echo base_url() . "User/vote_ajax/" ?>",
+        url: "<?php echo base_url() . "Choice_vote/vote_ajax/" ?>",
         method: "POST",
         dataType: "JSON",
         data: {
@@ -285,35 +285,6 @@ function vote_ajax(id, score) {
     });
 }
 
-function add_choice_vote() {
-
-    $.ajax({
-        type: "POST",
-        url: '<?php echo site_url() . 'User/add_choice_vote/' ?>',
-        data: {
-            vot_id: $("#vot_id").val(),
-            cho_name: $("#cho_name").val(),
-            cho_score: $("#cho_score").val()
-        },
-        success: function() {
-            // swal({
-            //         title: "อัพเดทตัวเลือกการโหวต",
-            //         text: "อัพเดทตัวเลือกการโหวตเสร็จสิ้น",
-            //         type: "success"
-            //     },
-            //     function() {
-            //         location.reload();
-            //     })
-            location.reload();
-
-        },
-        error: function() {
-            alert('ajax error working');
-        }
-    });
-}
-
-
 /*
  * update_choice_vote_ajax
  * update choice vote
@@ -325,7 +296,7 @@ function add_choice_vote() {
 function update_choice_vote(cho_id) {
     $.ajax({
         type: "POST",
-        url: '<?php echo site_url() . 'User/update_choice_vote_ajax/' ?>',
+        url: '<?php echo site_url() . 'Choice_vote/update_choice_vote_ajax/' ?>',
         data: {
             cho_id: $("#hid_cho_id" + cho_id).val(),
             choice_name: $("#txtChoiceName" + cho_id).val(),
@@ -364,7 +335,7 @@ function delete_choice_vote(cho_id) {
         data: {
             cho_id: cho_id
         },
-        url: '<?php echo base_url() . '/User/delete_choice_vote_ajax/' ?>',
+        url: '<?php echo base_url() . 'Choice_vote/delete_choice_vote_ajax/' ?>',
         success: function() {
             swal("สำเร็จ", "คุณได้ลบตัวเลือกโหวตเสร็จสิ้น", "success").then(function() {
                 location.reload();

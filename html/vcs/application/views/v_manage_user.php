@@ -136,7 +136,7 @@
             </div>
             <!-- ส่วนหัว -->
 
-            <form method='POST' action='<?php echo base_url('VCS_controller/add_manage_user') ?>'>
+            <form method='POST' action='<?php echo base_url().'User/add_manage_user' ?>'>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row py-2">
@@ -189,7 +189,7 @@
             </div>
             <!-- ส่วนหัว -->
 
-            <form method='POST' action="<?php echo base_url('VCS_controller/update_user_information') ?>">
+            <form method='POST' action="<?php echo base_url('User/update_user_information') ?>">
                 <div class="modal-body edit">
                     <div class="container">
                         <div class="row py-2">
@@ -271,7 +271,7 @@
             data: {
                 use_id: use_id_con
             },
-            url: '<?php echo base_url() . 'VCS_controller/delete_user' ?>',
+            url: '<?php echo base_url() . 'User/delete_user' ?>',
             success: function() {
                 swal({
                     title: "ลบผู้ใช้งาน",
@@ -306,26 +306,22 @@
         });
     }
 
-/*
- * edit modal user
- * edit modal information user
- * @input us_id
- * @output -
- * @author  Chutipon Thermsirisuksin
- * @Create Date 2565-03-14
- * @Update -
- */
-function confirm_edit(use_id,use_name, use_username,use_password,use_point) {
+    /*
+    * edit modal user
+    * edit modal information user
+    * @input us_id
+    * @output -
+    * @author  Chutipon Thermsirisuksin
+    * @Create Date 2565-03-14
+    * @Update -
+    */
+    function confirm_edit(use_id,use_name, use_username,use_password,use_point) {
+    $(".edit #use_id").val( use_id );
+    $(".edit #use_name").val( use_name );
+    $(".edit #use_username").val( use_username );
+    $(".edit #use_password").val( use_password );
+    $(".edit #use_point").val( use_point );
 
-
-$(".edit #use_id").val( use_id );
-$(".edit #use_name").val( use_name );
-$(".edit #use_username").val( use_username );
-$(".edit #use_password").val( use_password );
-$(".edit #use_point").val( use_point );
-
-
-
-$('#edit_modal').modal();
-}
+    $('#edit_modal').modal();
+    }
 </script>
