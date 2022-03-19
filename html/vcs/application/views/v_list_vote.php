@@ -25,6 +25,7 @@
         height: 0;
     }
 
+    /* slide ด้านใน toggle */
     .slider {
         position: absolute;
         cursor: pointer;
@@ -38,6 +39,7 @@
         border-radius: 34px;
     }
 
+    /* slide ด้านใน toggle ตอนปิด*/
     .slider:before {
         position: absolute;
         content: "";
@@ -51,6 +53,7 @@
         border-radius: 50%;
     }
 
+    /* สี slide ตอนเปิด */
     input:checked+.slider {
         background-color: #2196F3;
     }
@@ -59,12 +62,14 @@
         box-shadow: 0 0 1px #2196F3;
     }
 
+    /* สี slide ตอนปิด */
     input:checked+.slider:before {
         -webkit-transform: translateX(26px);
         -ms-transform: translateX(26px);
         transform: translateX(26px);
     }
 
+    /* ปรับตำแหน่งให้อยู่ตรงกลาง */
     #center {
         display: flex;
         justify-content: center;
@@ -431,14 +436,18 @@
      * @Update Date -
      */
     function show_modal_open_vote(id, name) {
+        // ชื่อระบบโหวต
         $('#name_vote_opn').html(name);
 
+        // เรียก modal เปิดระบบโหวต
         $('#open_vote_modal').modal();
 
+        // กดปุ่ม ตกลง ยืนยันเปิดระบบโหวต อัพเดทสถานะ
         $('#submit_opn').click(function() {
             update_status_vote_ajax(id, 2);
         });
 
+        // กดปุ่ม ยกเลิก ไม่โหวต รีหน้ากลับหน้าเดิม
         $('#cancel_opn').click(function() {
             location.reload();
         });
@@ -454,14 +463,18 @@
      * @Update Date -
      */
     function show_modal_close_vote(id, name) {
+        // ชื่อระบบโหวต
         $('#name_vote_close').html(name);
 
+        // เรียก modal เปิดระบบโหวต
         $('#close_vote_modal').modal();
 
+        // กดปุ่ม ตกลง ยืนยันปิดระบบโหวต อัพเดทสถานะ
         $('#submit_close').click(function() {
             update_status_vote_ajax(id, 1);
         });
 
+        // กดปุ่ม ยกเลิก ไม่ปิดโหวต รีหน้ากลับหน้าเดิม
         $('#cancel_close').click(function() {
             location.reload();
         });
