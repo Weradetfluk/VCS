@@ -268,7 +268,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="submit_opn" class="btn btn-success">ยืนยัน</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" id="cancel_opn" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
     </div>
@@ -286,7 +286,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="submit_close" class="btn btn-danger">ยืนยัน</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" id="cancel_close" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
     </div>
@@ -438,6 +438,10 @@
         $('#submit_opn').click(function() {
             update_status_vote_ajax(id, 2);
         });
+
+        $('#cancel_opn').click(function() {
+            location.reload();
+        });
     }
 
     /*
@@ -456,6 +460,10 @@
 
         $('#submit_close').click(function() {
             update_status_vote_ajax(id, 1);
+        });
+
+        $('#cancel_close').click(function() {
+            location.reload();
         });
     }
     /*
