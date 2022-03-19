@@ -75,3 +75,20 @@ ALTER TABLE `vcs_history_vote`
   ADD CONSTRAINT `vcs_history_vote_ibfk_1` FOREIGN KEY (`his_cho_id`) REFERENCES `vcs_choice_vote` (`cho_id`),
   ADD CONSTRAINT `vcs_history_vote_ibfk_2` FOREIGN KEY (`his_use_id`) REFERENCES `vcs_user` (`use_id`);
 
+--
+-- trigger `update_cho_score_use_point`
+--
+DROP TRIGGER IF EXISTS `update_cho_score_use_point`;
+DELIMITER //
+CREATE TRIGGER `update_cho_score_use_point` 
+AFTER INSERT ON `vcs_history_vote` 
+FOR EACH ROW 
+BEGIN 
+UPDATE vcs_user 
+SET vcs_user.use_point = vcs_user.use_point - new.his_score
+WHERE vcs_user.use_id = new.his_use_id;
+
+UPDATE vcs_choice_vote 
+SET vcs_choice_vote.cho_score = vcs_choice_vote.cho_score + new.his_score 
+WHERE vcs_choice_vote.cho_id = new.his_cho_id;
+END;//

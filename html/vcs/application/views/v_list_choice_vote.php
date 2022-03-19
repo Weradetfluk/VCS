@@ -11,7 +11,7 @@
         font-weight: 600;
     }
 </style>
-<div class="container border" style="margin-top: 30px;">
+<div class="container" style="margin-top: 30px;">
     <?php if ($this->session->userdata("use_status") == 2) { ?>
     <div class="row justify-content-md-end my-4">
         <div class="col-md-4">
@@ -27,35 +27,42 @@
         <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">
 
             <div class="container" style="width: 200px;">
-                <img src="<?= base_url() . 'image_choice_vote/' . $arr_choice_vote[$i]->cho_path ?>" class="card-img-top" style="width: 100%; height: 200px; object-fit: contain;">
-                <div class="card-body">
-
-                    <center><?= $arr_choice_vote[$i]->cho_name ?></center><br>
-
-                    <?php if ($this->session->userdata("use_status") == 2) { ?>
-                    <div class="row">
-                        <div class="col px-1">
-                            <button class="btn btn-warning" style="width: 100%;" data-toggle="modal"
-                                data-target="#editModal<?= $arr_choice_vote[$i]->cho_id ?>">
-                                แก้ไข
-                            </button>
-                        </div>
-                        <div class="col px-1">
-                            <button class="btn btn-danger" style="width: 100%;" data-toggle="modal"
-                                data-target="#deleteModal<?= $arr_choice_vote[$i]->cho_id ?>"> ลบ </button>
-                        </div>
-                    </div>
-                    <?php } else { ?>
-                    <button class="btn btn-info" style="width: 100%;"
-                        onclick="vote_modal(<?= $arr_choice_vote[$i]->cho_id ?>, '<?= $arr_choice_vote[$i]->cho_name ?>')">
-                        โหวต
-                    </button>
-                    <?php } ?>
-
-                </div>
-                <input type="hidden" value="<?= $arr_choice_vote[$i]->cho_score ?>"
-                    id="score_<?= $arr_choice_vote[$i]->cho_id ?>">
+                <img src="<?= base_url() . 'image_choice_vote/' . $arr_choice_vote[$i]->cho_path ?>" class="card-img-top" style="width: 100%; height: 180px; object-fit: contain;">
             </div>
+            <div class="card-body">
+                <center>
+                    <h5><?php echo $arr_choice_vote[$i]->cho_name ?></h5>
+                    <hr width="100%">
+                </center>
+                <div class="row">
+                    <div class="col">
+                        <p>ระบบ : <?= $arr_choice_vote[$i]->cho_system_name ?></p>
+                    </div>
+                </div>
+                <?php if ($this->session->userdata("use_status") == 2) { ?>
+                <div class="row">
+                    <div class="col px-1">
+                        <button class="btn btn-warning" style="width: 100%;" data-toggle="modal"
+                            data-target="#editModal<?= $arr_choice_vote[$i]->cho_id ?>">
+                            แก้ไข
+                        </button>
+                    </div>
+                    <div class="col px-1">
+                        <button class="btn btn-danger" style="width: 100%;" data-toggle="modal"
+                            data-target="#deleteModal<?= $arr_choice_vote[$i]->cho_id ?>"> ลบ </button>
+                    </div>
+                </div>
+                <?php } else { ?>
+                <button class="btn btn-info" style="width: 100%;"
+                    onclick="vote_modal(<?= $arr_choice_vote[$i]->cho_id ?>, '<?= $arr_choice_vote[$i]->cho_name ?>')">
+                    โหวต
+                </button>
+                <?php } ?>
+
+            </div>
+            <input type="hidden" value="<?= $arr_choice_vote[$i]->cho_score ?>"
+                id="score_<?= $arr_choice_vote[$i]->cho_id ?>">
+        
         </div>
 
         <!-- modal for edit choice -->

@@ -52,7 +52,7 @@ class Vote extends VCS_controller
     * delete vote
     * @input vot_id
     * @output -
-    * @author Thanisorn thumsawanit 62160088
+    * @author Suwapat Saowarod 62160340
     * @Create Date 2565-03-12
     * @Update -
     */
@@ -68,7 +68,7 @@ class Vote extends VCS_controller
  	* add choice vote
  	* @input data
  	* @output -
- 	* @author Priyarat Bumrungkit 62160156
+ 	* @author Suwapat Saowarod 62160340
  	* @Create Date 2565-03-12
  	*/
 	public function add_vote()

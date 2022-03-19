@@ -21,7 +21,7 @@
     <?php for ($i = 0; $i < count($arr_vote); $i++) { ?>
         <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">
             <div class="container " style="width: 200px;">
-                <img src="<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>" class="card-img-top" style="width: 100%; height: 200px; object-fit: contain;">
+                <img src="<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>" class="card-img-top" style="width: 100%; height: 180px; object-fit: contain;">
             </div>
             <div class="card-body">
                 <center>

@@ -20,7 +20,7 @@ class M_vcs_choice_vote extends Da_vcs_choice_vote
     */
     function get_choice_vote_by_vot_id()
     {
-        $sql = "SELECT cho_id, cho_name, cho_score, cho_path from vcs_choice_vote
+        $sql = "SELECT cho_id, cho_name, cho_score, cho_path, cho_system_name from vcs_choice_vote
                 WHERE cho_vot_id = ? AND cho_status = 1";
         $query = $this->db->query($sql, array($this->cho_vot_id));
         return $query->result();
