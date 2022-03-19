@@ -10,19 +10,48 @@
         </div>
     </div>
 </div>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/drilldown.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="<?php echo base_url() .'asset/dist/highcharts.js'?> "></script>
+<script src="<?php echo base_url() . 'asset/dist/modules/data.js'?> "></script>
+<script src="<?php echo base_url() . 'asset/dist/modules/drilldown.js'?>"></script>
+<script src="<?php echo base_url() . 'asset/dist/modules/exporting.js'?> "></script>
+<script src="<?php echo base_url() . 'asset/dist//modules/export-data.js' ?>"></script>
+<script src="<?php echo base_url() . 'asset/dist/modules/accessibility.js'?> "></script>
 
 <script>
+    var gold_url = "https://se.buu.ac.th/gami_ossd/assets/dist/img/gold_crown.png"
+    var sliver_url = "https://se.buu.ac.th/gami_ossd/assets/dist/img/sliver_crown.png"
+    var bronze_url = "https://se.buu.ac.th/gami_ossd/assets/dist/img/broezn_crown.png"
     var cho_vot_id = <?php echo $cho_vot_id; ?>;
+    var gold_formatter = {
+        enabled: true,
+        useHTML: true,
+        y: -70,
+        formatter: function() {
+            return '<div style="text-align: center;" class="tooltip-title-font"><img width="45px"  src="' + gold_url + '"></img><br>' + Highcharts.numberFormat(this.y, 2) + '</div>'
+        }
+    }
+    var sliver_formatter = {
+        enabled: true,
+        useHTML: true,
+        y: -70,
+        formatter: function() {
+            return '<div style="text-align: center;" class="tooltip-title-font"><img width="45px"  src="' + sliver_url + '"></img><br>' + Highcharts.numberFormat(this.y, 2) + '</div>'
+        }
+    }
+    var bronze_formatter = {
+        enabled: true,
+        useHTML: true,
+        y: -70,
+        formatter: function() {
+            return '<div style="text-align: center;" class="tooltip-title-font"><img width="45px"  src="' + bronze_url + '"></img><br>' + Highcharts.numberFormat(this.y, 2) + '</div>'
+        }
+    }
+
 
     $(document).ready(function() {
         get_data_score_ajax(cho_vot_id)
-});
+    });
+
     function get_data_score_ajax(cho_vot_id) {
         $.ajax({
             type: 'post',
@@ -45,26 +74,59 @@
     }
 
 
+    function findIndicesOfMax(inp, count) {
+        var outp = new Array();
+        for (var i = 0; i < inp.length; i++) {
+            outp.push(i);
+            if (outp.length > count) {
+                outp.sort(function(a, b) {
+                    return inp[b].y - inp[a].y;
+                });
+                outp.pop();
+            }
+        }
+        return outp;
+    } // End findIndicesOfMax
+
+
     function create_chart_dashborad(arr_score) {
         var obj_data_point = []; // อาเรย์ข้อมูลที่ สร้าง Barchart  ประเภทกิจกรรม
-            
 
-          arr_score.forEach((row, index) => {
-       
-             obj_data_point.push({
-                    name: row['cho_name'],
-                    y: parseInt(row['cho_score']), // str to int
-                });
 
-                // จะได้ bar chart
+        arr_score.forEach((row, index) => {
+
+            obj_data_point.push({
+                name: row['cho_name'],
+                y: parseInt(row['cho_score']), // str to int
             });
+
+            // จะได้ bar chart
+        });
+
+        // console.log(obj_data_point[0]);
+
+
+        var indices = findIndicesOfMax(obj_data_point, 3);
+
+        for (var i = 0; i < indices.length; i++) {
+            if (i == 0) {
+                obj_data_point[indices[i]].dataLabels = gold_formatter
+            }
+            if (i == 1) {
+                obj_data_point[indices[i]].dataLabels = sliver_formatter
+            }
+            if (i == 2) {
+                obj_data_point[indices[i]].dataLabels = bronze_formatter
+            }
+        }
+
 
         Highcharts.chart('container', {
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'OSSD #10'
+                text: 'Open Source Software Developers Camp #10'
             },
             subtitle: {
                 text: ''
@@ -106,34 +168,16 @@
                 data: obj_data_point,
             }],
             exporting: {
-            buttons: {
-                customButton: {
-                    x: -62,
-                    onclick: function () {
-                        get_data_score_ajax(cho_vot_id);
-                    },
-                    text: 'Refetch',
+                buttons: {
+                    customButton: {
+                        x: -62,
+                        onclick: function() {
+                            get_data_score_ajax(cho_vot_id);
+                        },
+                        text: 'Refresh',
+                    }
                 }
             }
-        }
         });
     }
-
-    Highcharts.SVGRenderer.prototype.symbols.refetch = function (x, y, w, h) {
-    var path = [
-        // Arrow stem
-        'M', x + w * 0.5, y,
-        'L', x + w * 0.5, y + h * 0.7,
-        // Arrow head
-        'M', x + w * 0.3, y + h * 0.5,
-        'L', x + w * 0.5, y + h * 0.7,
-        'L', x + w * 0.7, y + h * 0.5,
-        // Box
-        'M', x, y + h * 0.9,
-        'L', x, y + h,
-        'L', x + w, y + h,
-        'L', x + w, y + h * 0.9
-    ];
-    return path;
-};
 </script>

@@ -30,6 +30,14 @@ class Dashboard_score extends VCS_controller
 		$this->show_list_vote_page();
 	}
 
+
+	public function show_list_vote_page(){
+		$data = array();
+		$data['arr_vote'] = $this->get_data_vote();
+		$this->output('v_list_vote_dashboard', $data);
+	}
+
+
 	/*
 	* index
 	* 
@@ -38,10 +46,18 @@ class Dashboard_score extends VCS_controller
 	* @author weradet nopsombun 62160110
 	* @Create Date 2565-03-12
 	*/
-	public function show_list_vote_page()
+	public function get_data_vote()
 	{
-		
-
+		$this->load->model('M_vcs_vote', 'vvot');
+		date_default_timezone_set('Asia/Bangkok');
+		$date_now = date("Y-m-d H:i:s");
+		if ($this->session->userdata("use_status") == 1) {
+			$and = "('" .  $date_now . "' between vot_start_time AND vot_end_time) AND vot_status = 2";
+		} else {
+			$and = '';
+		}
+		$data['arr_vote'] = $this->vvot->get_vote_all($and);
+		return $data;
 	}
 
 	/*
