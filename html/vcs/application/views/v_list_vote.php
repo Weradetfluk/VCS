@@ -10,6 +10,68 @@
         color: #f5f5f5;
         font-weight: 600;
     }
+
+    /* Toggle Switch */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    #center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* End Toggle Switch */
 </style>
 <div class="container" style="margin-top: 10px;">
     <?php if ($this->session->userdata("use_status") == 2) { ?>
@@ -53,22 +115,22 @@
                     <hr>
                     <?php if ($arr_vote[$i]->vot_status == 1) { ?>
                         <div class="row">
-                            <div class="col px-1">
-                                <button class="btn btn-success" style="width: 100%;" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    เปิดโหวต
-                                    <!-- <span class="material-icons">
-                                        play_circle_outline
-                                    </span> </button> -->
+                            <div class="col px-1" id="center">
+                                <!-- สถานะเปิด -->
+                                <label class="switch" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
                         </div>
                     <?php } else { ?>
                         <div class="row">
-                            <div class="col px-1">
-                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    ปิดโหวต
-                                    <!-- <i class="material-icons">
-                                        stop
-                                </i></button> -->
+                            <div class="col px-1" id="center">
+                                <!-- สถานะปิด -->
+                                <label class="switch" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
                         </div>
                     <?php } ?>
@@ -238,7 +300,7 @@
      * @Update Date 2565-03-16
      */
 
-    $( document ).ready(function() {
+    $(document).ready(function() {
         let error_add = '<?= $this->session->userdata("add_error_image"); ?>';
         let error_edit = '<?= $this->session->userdata("edit_error_image"); ?>';
         if (error_add == "success") {
