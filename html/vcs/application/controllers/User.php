@@ -36,14 +36,17 @@ class User extends VCS_controller
 	*/
 	public function show_manage_user_page()
 	{
+		$this->session->unset_userdata('page');
+		$this->session->set_userdata('page', 2);
+
 		$this->load->model('/M_vcs_user', 'vuse');
 		$data['arr_user'] = $this->vuse->get_user_all();
 		$this->output('v_manage_user', $data);
 	}
 
 	/*
-	* show_manage_user_page
-	* show manage user page 
+	* add_manage_user
+	* add manage user 
 	* @input data
 	* @output -
 	* @author naaka punparich 62160082 

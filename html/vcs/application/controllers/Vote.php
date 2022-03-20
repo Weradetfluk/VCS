@@ -43,6 +43,10 @@ class Vote extends VCS_controller
 		} else {
 			$and = '';
 		}
+		
+		$this->session->unset_userdata('page');
+		$this->session->set_userdata('page', 1);
+
 		$data['arr_vote'] = $this->vvot->get_vote_all($and);
 		$this->output('v_list_vote', $data);
 	}

@@ -32,6 +32,9 @@ class Dashboard_score extends VCS_controller
 
 
 	public function show_list_vote_page(){
+		$this->session->unset_userdata('page');
+		$this->session->set_userdata('page', 3);
+
 		$data = array();
 		$data['arr_vote'] = $this->get_data_vote();
 		$this->output('v_list_vote_dashboard', $data);
