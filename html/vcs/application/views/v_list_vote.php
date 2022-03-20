@@ -78,74 +78,77 @@
 
     /* End Toggle Switch */
 </style>
-<div class="container" style="margin-top: 10px;">
-    <?php if ($this->session->userdata("use_status") == 2) { ?>
-        <button type="button" class="btn btn-info" style="float: right;" onclick="show_modal_add_vote()">เพิ่มโหวต</button><br>
-    <?php } ?>
-
-</div>
-<div class="row">
-    <?php for ($i = 0; $i < count($arr_vote); $i++) { ?>
-        <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">
-            <div class="container " style="width: 200px;">
-                <img src="<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>" class="card-img-top" style="width: 100%; height: 180px; object-fit: contain;">
-            </div>
-            <div class="card-body">
-                <center>
-                    <h5><?php echo $arr_vote[$i]->vot_name ?></h5>
-                    <hr width="100%">
-                </center>
-                <p>
-                    <?php echo 'เริ่ม ' . to_format_abbreviation(explode(" ", $arr_vote[$i]->vot_start_time)[0]) . ' เวลา ' . substr(explode(" ", $arr_vote[$i]->vot_start_time)[1], 0, 5) ?>
-                </p>
-                <p>
-                    <?php echo 'สิ้นสุด ' . to_format_abbreviation(explode(" ", $arr_vote[$i]->vot_end_time)[0]) . ' เวลา ' . substr(explode(" ", $arr_vote[$i]->vot_end_time)[1], 0, 5) ?>
-                </p>
-                <div class="row" style="padding: 0px 0px 10px 0px;">
-                    <div class="col px-1">
-                        <a href="<?= base_url() . 'Choice_vote/show_choice_vote_list/' . $arr_vote[$i]->vot_id; ?>" class="btn btn-info" style="width: 100%;">เลือก</a>
-                    </div>
-                </div>
-                <?php if ($this->session->userdata("use_status") == 2) { ?>
-                    <div class="row">
-                        <div class="col px-1">
-                            <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_vote('<?php echo $arr_vote[$i]->vot_id ?>', '<?php echo $arr_vote[$i]->vot_name ?>','<?php echo substr($arr_vote[$i]->vot_start_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_start_time, 11, 5) ?>','<?php echo substr($arr_vote[$i]->vot_end_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_end_time, 11, 5) ?>','<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>')">
-                                แก้ไข
-                            </button>
-                        </div>
-                        <div class="col px-1">
-                            <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_delete_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')"> ลบ </button>
-                        </div>
-                    </div>
-                    <hr>
-                    <?php if ($arr_vote[$i]->vot_status == 1) { ?>
-                        <div class="row">
-                            <div class="col px-1" id="center">
-                                <!-- สถานะเปิด -->
-                                <label class="switch" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-                    <?php } else { ?>
-                        <div class="row">
-                            <div class="col px-1" id="center">
-                                <!-- สถานะปิด -->
-                                <label class="switch" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-                    <?php } ?>
-
-                <?php } ?>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <?php if ($this->session->userdata("use_status") == 2) { ?>
+                <button type="button" class="btn btn-info float-right" style="margin-right: 10.8%;" onclick="show_modal_add_vote()">เพิ่มโหวต</button><br>
+            <?php } ?>
         </div>
-    <?php } ?>
+    </div>
+
+    <div class="row">
+        <?php for ($i = 0; $i < count($arr_vote); $i++) { ?>
+            <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">
+                <div class="container" style="width: 200px;">
+                    <img src="<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>" class="card-img-top" style="width: 100%; height: 180px; object-fit: contain;">
+                </div>
+                <div class="card-body">
+                    <center>
+                        <h5><?php echo $arr_vote[$i]->vot_name ?></h5>
+                        <hr width="100%">
+                    </center>
+                    <p>
+                        <?php echo 'เริ่ม ' . to_format_abbreviation(explode(" ", $arr_vote[$i]->vot_start_time)[0]) . ' เวลา ' . substr(explode(" ", $arr_vote[$i]->vot_start_time)[1], 0, 5) ?>
+                    </p>
+                    <p>
+                        <?php echo 'สิ้นสุด ' . to_format_abbreviation(explode(" ", $arr_vote[$i]->vot_end_time)[0]) . ' เวลา ' . substr(explode(" ", $arr_vote[$i]->vot_end_time)[1], 0, 5) ?>
+                    </p>
+                    <div class="row" style="padding: 0px 0px 10px 0px;">
+                        <div class="col px-1">
+                            <a href="<?= base_url() . 'Choice_vote/show_choice_vote_list/' . $arr_vote[$i]->vot_id; ?>" class="btn btn-info" style="width: 100%;">เลือก</a>
+                        </div>
+                    </div>
+                    <?php if ($this->session->userdata("use_status") == 2) { ?>
+                        <div class="row">
+                            <div class="col px-1">
+                                <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_vote('<?php echo $arr_vote[$i]->vot_id ?>', '<?php echo $arr_vote[$i]->vot_name ?>','<?php echo substr($arr_vote[$i]->vot_start_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_start_time, 11, 5) ?>','<?php echo substr($arr_vote[$i]->vot_end_time, 0, 10) . 'T' . substr($arr_vote[$i]->vot_end_time, 11, 5) ?>','<?= base_url() . 'image_vote/' . $arr_vote[$i]->vot_path ?>')">
+                                    แก้ไข
+                                </button>
+                            </div>
+                            <div class="col px-1">
+                                <button class="btn btn-danger" style="width: 100%;" onclick="show_modal_delete_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')"> ลบ </button>
+                            </div>
+                        </div>
+                        <hr>
+                        <?php if ($arr_vote[$i]->vot_status == 1) { ?>
+                            <div class="row">
+                                <div class="col px-1" id="center">
+                                    <!-- สถานะเปิด -->
+                                    <label class="switch" onclick="show_modal_open_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="row">
+                                <div class="col px-1" id="center">
+                                    <!-- สถานะปิด -->
+                                    <label class="switch" onclick="show_modal_close_vote(<?= $arr_vote[$i]->vot_id ?>, '<?= $arr_vote[$i]->vot_name ?>')">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
 </div>
-</div>
+
 
 <!-- modal add vote -->
 <div class="modal" tabindex="-1" id="modal_add_vote">
