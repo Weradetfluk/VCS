@@ -13,21 +13,27 @@
 </style>
 <div class="container" style="margin-top: 30px;">
     <?php if ($this->session->userdata("use_status") == 2) { ?>
-    <?php $id_vote = ""; ?>    
-    <?php $id_vote = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
-    <?php $id_vote_cut = substr($id_vote, -1)?>
-    <div class="row justify-content-md-end my-4">
-        <div class="col-md-8">
-        <a href="<?php echo base_url().'Vote/show_vote_list';?>">จัดการโหวต</a> >
-            <?php echo $arr_vote[$id_vote_cut-1]->vot_name; ?>
+        <?php $id_vote = ""; ?>    
+        <?php $id_vote = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
+        <?php $id_vote_cut = substr($id_vote, -1)?>
+        <div class="row justify-content-md-end my-4">
+                <div class="col-md-8">
+                <a href="<?php echo base_url().'Vote/show_vote_list';?>">จัดการโหวต</a> >
+                    <?php for ($j = 0; $j < count($arr_vote); $j++) { ?>
+                        <?php if ($arr_vote[$j]->vot_id == $id_vote_cut) { ?>
+                        
+                                <?php echo $arr_vote[$j]->vot_name; ?>
+                            
+                        <?php } ?>
+                    <?php } ?>
+        </div>        
+            <div class="col-md-4">
+                <?php if ($this->session->userdata("use_status") == 2) { ?>
+                <button type="button" class="btn btn-info" style="float: right;"
+                    onclick="show_modal_add_choice_vote()">เพิ่มตัวเลือกโหวต</button><br>
+                <?php } ?>
+            </div>
         </div>
-        <div class="col-md-4">
-            <?php if ($this->session->userdata("use_status") == 2) { ?>
-            <button type="button" class="btn btn-info" style="float: right;"
-                onclick="show_modal_add_choice_vote()">เพิ่มตัวเลือกโหวต</button><br>
-            <?php } ?>
-        </div>
-    </div>
     <?php } ?>
     <div class="row justify-content-start">
         <?php for ($i = 0; $i < count($arr_choice_vote); $i++) { ?>
