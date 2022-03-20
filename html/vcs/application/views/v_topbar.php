@@ -60,7 +60,7 @@ if (!$this->session->has_userdata("use_id")) {
       <?php } ?>
   </div>
 
-  <div class="col-3">
+  <div class="col-3 form-inline" style="justify-content: right;">
     <?php if ($this->session->userdata("use_status") == 1) { ?>
       <span class="navbar-brand mb-0 h1 float-right" style="background-color: white; color:black; border-radius: 10px;padding: 0px 10px;">คะแนนที่มี <?php echo $this->session->userdata("use_point") ?></span>
     <?php } ?>
