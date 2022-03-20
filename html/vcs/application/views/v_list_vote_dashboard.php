@@ -11,7 +11,7 @@
     font-weight: 600;
     }
     </style>
-    <div class="container">
+    <div class="container body">
         <div class="row">
             <?php for ($i = 0; $i < count($arr_vote['arr_vote']); $i++) { ?>
                 <div class="card col-lg-3 col-sm-6 col-md-4 col-10" style="margin:20px 30px;">

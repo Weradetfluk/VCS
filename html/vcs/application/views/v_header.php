@@ -16,7 +16,7 @@
     <link rel="preload" onload="this.rel = 'stylesheet'" href="<?php echo base_url() . 'asset/icon/material_icon.css' ?>" as="style" type="text/css">
 
     <style>
-        body {
+        .body {
             margin-top: 5%;
             z-index: 2;
         }

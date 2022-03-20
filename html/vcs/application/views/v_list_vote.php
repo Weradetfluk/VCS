@@ -78,7 +78,7 @@
 
     /* End Toggle Switch */
 </style>
-<div class="container">
+<div class="container body">
     <div class="row">
         <div class="col">
             <?php if ($this->session->userdata("use_status") == 2) { ?>

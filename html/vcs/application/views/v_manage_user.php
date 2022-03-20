@@ -20,7 +20,7 @@
     }
 </style>
 
-<div class="container py-4">
+<div class="container py-4 body">
     <div class="card">
         <div class="row" style="padding-top:3%;">
             <div class="col">

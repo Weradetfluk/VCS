@@ -11,7 +11,7 @@
     font-weight: 600;
 }
 </style>
-<div class="container" style="margin-top: 30px;">
+<div class="container body" style="margin-top: 30px;">
     <?php if ($this->session->userdata("use_status") == 2) { ?>
         <?php $id_vote = ""; ?>    
         <?php $id_vote = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
