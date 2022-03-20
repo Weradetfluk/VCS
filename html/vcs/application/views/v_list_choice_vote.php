@@ -118,7 +118,7 @@
                 <input class="form-control" type="number" id="score_vote" placeholder="กรอกคะแนน">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">ยกเลิก</button>
                 <button id="submit_vote" class="btn btn-success" disabled>ยืนยัน</button>
             </div>
         </div>
@@ -274,7 +274,7 @@ $(document).ready(function() {
 function vote_modal(id, name) {
     // console.log(id + ': ' + name);
     $('#name_vote').html(name);
-    $('#modal_vote').modal();
+    $('#modal_vote').modal({backdrop: 'static', keyboard: false});
 
     $('#score_vote').blur(function() {
         var score = $('#score_vote').val();
