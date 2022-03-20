@@ -13,7 +13,14 @@
 </style>
 <div class="container" style="margin-top: 30px;">
     <?php if ($this->session->userdata("use_status") == 2) { ?>
+    <?php $id_vote = ""; ?>    
+    <?php $id_vote = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
+    <?php $id_vote_cut = substr($id_vote, -1)?>
     <div class="row justify-content-md-end my-4">
+        <div class="col-md-8">
+        <a href="<?php echo base_url().'Vote/show_vote_list';?>">จัดการโหวต</a> >
+            <?php echo $arr_vote[$id_vote_cut-1]->vot_name; ?>
+        </div>
         <div class="col-md-4">
             <?php if ($this->session->userdata("use_status") == 2) { ?>
             <button type="button" class="btn btn-info" style="float: right;"

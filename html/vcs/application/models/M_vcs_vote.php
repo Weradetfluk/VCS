@@ -28,4 +28,23 @@ class M_vcs_vote extends Da_vcs_vote{
         $query = $this->db->query($sql);
         return $query->result();
     }
+
+    /*
+    * get_vote_name
+    * get_vote_name
+    * @input -
+    * @output -
+    * @author Chutipon Thermsirisuksin
+    * @Create Date 2565-03-20
+    * @Update Date -
+    */
+    function get_vote_name()
+    {   
+        
+        $sql = "SELECT * from vcs_vote";
+        
+        
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
 }

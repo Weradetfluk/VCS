@@ -77,8 +77,11 @@ class Choice_vote extends VCS_controller
 	public function show_choice_vote_list($vot_id)
 	{
 		$this->load->model('M_vcs_choice_vote', 'mcho');
+		$this->load->model('M_vcs_vote', 'mvot');
 		$this->mcho->cho_vot_id = $vot_id;
 		$data['arr_choice_vote'] = $this->mcho->get_choice_vote_by_vot_id();
+		$data['arr_vote'] = $this->mvot->get_vote_name();
+
 		$data['vot_id'] = $vot_id;
 		$this->output('v_list_choice_vote', $data);
 	}

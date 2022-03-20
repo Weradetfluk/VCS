@@ -31,9 +31,9 @@ if (!$this->session->has_userdata("use_id")) {
     if($this->session->userdata("use_status") == 2){?>
       <span class="navbar-text">
         <ul class="nav">
-          <li class="nav-item nav-active"><a class="nav-link make-nav" href="<?php echo base_url().'Vote/show_vote_list'?>">จัดการโหวด</a></li>
+          <li class="nav-item nav-active"><a class="nav-link make-nav" href="<?php echo base_url().'Vote/show_vote_list'?>">จัดการโหวต</a></li>
           <li class="nav-item"><a class="nav-link make-nav" href="<?php echo base_url().'User/show_manage_user_page'?>">จัดการผู้ใช้งาน</a></li>
-          <li class="nav-item"><a class="nav-link make-nav" href="<?php echo base_url().'Dashboard_score/show_list_vote_page/'?>">ดูผลโหวด</a></li>
+          <li class="nav-item"><a class="nav-link make-nav" href="<?php echo base_url().'Dashboard_score/show_list_vote_page/'?>">ดูผลโหวต</a></li>
         </ul>
       </span>
     <?php }
