@@ -57,14 +57,29 @@ class Da_vcs_choice_vote extends VCS_model
         $this->db->query($sql, array($this->cho_id));
     }
 
+    /*
+    * update_choice_vote
+    * delete choice vote
+    * @input cho_id
+    * @output -
+    * @author Jutamas Thaptong 62160079
+    * @Create Date 2564-03-12
+    */
     public function update_choice_vote()
     {
         $sql = "UPDATE `vcs_choice_vote` SET 
                     `cho_name`=?,
-                    `cho_score`=?
+                    `cho_system_name`=?,
+                    `cho_path`=?
                 WHERE cho_id = ?";
 
-        $this->db->query($sql, array($this->cho_name, $this->cho_score, $this->cho_id));
+        $this->db->query($sql, array($this->cho_name, $this->cho_system_name, $this->cho_path, $this->cho_id));
+    }
+
+    public function delete_image_choice_vote()
+    {
+        $sql = "DELETE FROM `vcs_choice_vote` WHERE cho_path = ?";
+        $this->db->query($sql, array($this->cho_path));
     }
 
     /*
