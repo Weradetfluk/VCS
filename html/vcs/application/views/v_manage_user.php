@@ -22,12 +22,26 @@
 
 <div class="container py-4">
     <div class="card">
-        <div class="row py-4">
+        <div class="row" style="padding-top:3%;">
             <div class="col">
                 <h2 align="center"><b>จัดการผู้ใช้งาน</b></h2>
             </div>
         </div>
         <!-- หัวเรื่องของตาราง -->
+        <div class="row py-2" style="text-align: center">
+
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <!-- เว้นวรรค -->
+        <div class="col">
+                <button type="button" class="btn btn-success" style="width: 112px;" data-toggle="modal" data-target="#myModal">เพิ่ม</button>
+        </div>
+            <!-- ปุ่มเพิ่ม -->
+
+        </div>
+        <!-- ปุ่มเพิ่มมกุล -->
+        
 
         <div class="row py-3" style="text-align: center">
             <div class="col">
@@ -39,11 +53,6 @@
                 <h4>ชื่อผู้ใช้</h4>
             </div>
             <!-- ชื่อผู้ใช้ -->
-
-            <div class="col">
-                <h4>รหัสผ่าน</h4>
-            </div>
-            <!-- รหัสผ่าน -->
 
             <div class="col">
                 <h4>คะแนน</h4>
@@ -73,11 +82,6 @@
                         <p><?php echo $arr_user[$i]->use_username ?></p>
                     </div>
                     <!-- ชื่อผู้ใช้ -->
-
-                    <div class="col">
-                        <p>**********</p>
-                    </div>
-                    <!-- รหัสผ่าน -->
 
                     <div class="col">
                         <p><?php echo $arr_user[$i]->use_point ?></p>
@@ -112,11 +116,6 @@
             <div class="col"></div>
             <div class="col"></div>
             <!-- เว้นวรรค -->
-
-            <div class="col">
-                <button type="button" class="btn btn-success" style="width: 112px;" data-toggle="modal" data-target="#myModal">เพิ่ม</button>
-            </div>
-            <!-- ปุ่มเพิ่ม -->
 
         </div>
         <!-- ปุ่มเพิ่มมกุล -->
