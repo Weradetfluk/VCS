@@ -3,7 +3,7 @@
         height: 500px;
     }
 </style>
-<div class="container body" style="margin-top: 30px;">
+<div class="container body">
     <div class="row">
         <div class="col">
             <div id="container"></div>
