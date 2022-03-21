@@ -76,15 +76,26 @@
 
     function findIndicesOfMax(inp, count) {
         var outp = new Array();
+
+
+        console.log(inp);
+
         for (var i = 0; i < inp.length; i++) {
             outp.push(i);
-            if (outp.length > count) {
+        }
+
+        if (outp.length >  count) {
+                outp.sort(function(a, b) {
+                    return inp[b].y - inp[a].y;
+                });
+                outp.pop();
+            }else{
                 outp.sort(function(a, b) {
                     return inp[b].y - inp[a].y;
                 });
                 outp.pop();
             }
-        }
+        console.log("outp : " + outp);
         return outp;
     } // End findIndicesOfMax
 
@@ -103,11 +114,14 @@
             // จะได้ bar chart
         });
 
+        console.log(obj_data_point);
+
         // console.log(obj_data_point[0]);
 
 
         var indices = findIndicesOfMax(obj_data_point, 3);
 
+        console.log(indices);
         for (var i = 0; i < indices.length; i++) {
             if (i == 0) {
                 obj_data_point[indices[i]].dataLabels = gold_formatter
