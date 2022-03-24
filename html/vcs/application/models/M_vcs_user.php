@@ -48,4 +48,20 @@ class M_vcs_user extends Da_vcs_user
         $query = $this->db->query($sql);
         return $query->result();
     }
+
+    /*
+    * get_by_id
+    * get user by id
+    * @input -
+    * @output -
+    * @author Suwapat Saowarod 62160340 
+    * @Create Date 2565-03-24
+    * @Update Date -
+    */
+    function get_by_id()
+    {
+        $sql = "SELECT use_password from vcs_user WHERE use_id = ?";
+        $query = $this->db->query($sql, array($this->use_id));
+        return $query->row();
+    }
 }

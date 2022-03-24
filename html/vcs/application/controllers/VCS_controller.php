@@ -79,7 +79,7 @@ class VCS_controller extends CI_Controller
 	{
 		$this->load->model('/M_vcs_user', 'vuse');
 		$this->vuse->use_username = $this->input->post('username');
-		$this->vuse->use_password = $this->input->post('password');
+		$this->vuse->use_password = md5($this->input->post('password'));
 		$check_login = $this->vuse->get_by_username_and_password();
 
 		if ($check_login) {
