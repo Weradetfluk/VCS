@@ -14,7 +14,6 @@
 <div class="container body">
 
     <div class="row mb-3">
-        <?php if ($this->session->userdata("use_status") == 2) { ?>
             <?php $id_vote = ""; ?>
             <?php $id_vote = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
             <?php $id_vote_cut = substr($id_vote, -1) ?>
@@ -35,7 +34,6 @@
                 <?php } ?>
             </div>
 
-        <?php } ?>
     </div>
 
     <div class="row">
