@@ -60,7 +60,7 @@ class M_vcs_user extends Da_vcs_user
     */
     function get_by_id()
     {
-        $sql = "SELECT use_password from vcs_user WHERE use_id = ?";
+        $sql = "SELECT * from vcs_user WHERE use_id = ?";
         $query = $this->db->query($sql, array($this->use_id));
         return $query->row();
     }

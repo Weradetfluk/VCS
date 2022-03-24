@@ -81,9 +81,17 @@ class Choice_vote extends VCS_controller
 		$this->mcho->cho_vot_id = $vot_id;
 		$data['arr_choice_vote'] = $this->mcho->get_choice_vote_by_vot_id();
 		$data['arr_vote'] = $this->mvot->get_vote_name();
+		$this->load->model('M_vcs_user', 'muse');
+		if ($this->session->has_userdata("use_status") == 2) {
+			$this->muse->use_id = $this->session->userdata("use_id");
 
+			$result = $this->muse->get_by_id();
+			$this->session->set_userdata("use_point", $result->use_point);
+		}
 		$data['vot_id'] = $vot_id;
 		$this->output('v_list_choice_vote', $data);
+
+		
 	}
 
 	/*
