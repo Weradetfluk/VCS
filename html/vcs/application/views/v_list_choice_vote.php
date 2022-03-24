@@ -266,7 +266,7 @@
             keyboard: false
         });
 
-        $('#score_vote').change(function() {
+        $('#score_vote').blur(function() {
             var score = $('#score_vote').val();
             if (score > 0 && score <= <?= $this->session->userdata("use_point") ?>) {
                 console.log(1);
