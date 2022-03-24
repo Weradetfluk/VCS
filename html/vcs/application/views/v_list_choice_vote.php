@@ -53,13 +53,13 @@
                     </center>
                     <div class="row">
                         <div class="col">
-                            <p>ระบบ : <?= $arr_choice_vote[$i]->cho_system_name ?></p>
+                            <p>ระบบ : <?= $arr_choice_vote[$i]->cho_description ?></p>
                         </div>
                     </div>
                     <?php if ($this->session->userdata("use_status") == 2) { ?>
                         <div class="row">
                             <div class="col px-1">
-                                <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_choice_vote('<?php echo $arr_choice_vote[$i]->cho_id ?>', '<?php echo $arr_choice_vote[$i]->cho_name ?>', '<?php echo $arr_choice_vote[$i]->cho_system_name ?>', '<?= base_url() . 'image_choice_vote/' . $arr_choice_vote[$i]->cho_path ?>')">
+                                <button class="btn btn-warning" style="width: 100%;" onclick="show_modal_edit_choice_vote('<?php echo $arr_choice_vote[$i]->cho_id ?>', '<?php echo $arr_choice_vote[$i]->cho_name ?>', '<?php echo $arr_choice_vote[$i]->cho_description ?>', '<?= base_url() . 'image_choice_vote/' . $arr_choice_vote[$i]->cho_path ?>')">
                                     แก้ไข
                                 </button>
                             </div>
@@ -155,8 +155,8 @@
                             <input type="text" class="form-control" id="cho_name" name="cho_name" placeholder="ใส่ชื่อตัวเลือกโหวต">
                         </div>
                         <div class="form-group col-12">
-                            <label class="low-lebel">ชื่อระบบ</label>
-                            <input type="text" class="form-control" id="cho_system_name" name="cho_system_name" placeholder="ใส่ชื่อระบบ">
+                            <label class="low-lebel">รายละเอียด</label>
+                            <input type="text" class="form-control" id="cho_description" name="cho_description" placeholder="ใส่รายละเอียด">
                         </div>
                     </div>
                 </div>
@@ -204,8 +204,8 @@
                             <input type="text" class="form-control" id="cho_name" name="cho_name" placeholder="ใส่ชื่อตัวเลือกโหวต">
                         </div>
                         <div class="form-group col-12">
-                            <label class="low-lebel">ชื่อระบบ</label>
-                            <input type="text" class="form-control" id="cho_system_name" name="cho_system_name" placeholder="ใส่ชื่อระบบ">
+                            <label class="low-lebel">รายละเอียด</label>
+                            <input type="text" class="form-control" id="cho_description" name="cho_description" placeholder="ใส่รายละเอียด">
                         </div>
                         <input type="hidden" name="cho_path_old" id="cho_path_old">
                     </div>
@@ -409,7 +409,7 @@
 
         $(".edit #cho_id").val(id);
         $(".edit #cho_name").val(name);
-        $(".edit #cho_system_name").val(sys_name);
+        $(".edit #cho_description").val(sys_name);
         $(".edit #image_vote_edit").attr("src", path);
         let result_path = path.split("/");
         $("#cho_path_old").val(result_path[result_path.length - 1]);

@@ -16,7 +16,7 @@ class Da_vcs_choice_vote extends VCS_model
     public $cho_vot_id;
     public $cho_status;
     public $cho_path;
-    public $cho_system_name;
+    public $cho_description;
 
     /*
     * @author Suwapat Saowarod 62160340
@@ -69,11 +69,11 @@ class Da_vcs_choice_vote extends VCS_model
     {
         $sql = "UPDATE `vcs_choice_vote` SET 
                     `cho_name`=?,
-                    `cho_system_name`=?,
+                    `cho_description`=?,
                     `cho_path`=?
                 WHERE cho_id = ?";
 
-        $this->db->query($sql, array($this->cho_name, $this->cho_system_name, $this->cho_path, $this->cho_id));
+        $this->db->query($sql, array($this->cho_name, $this->cho_description, $this->cho_path, $this->cho_id));
     }
 
     public function delete_image_choice_vote()
@@ -92,7 +92,7 @@ class Da_vcs_choice_vote extends VCS_model
     */
     public function add_choice_vote()
     {
-        $sql = "INSERT INTO vcs_choice_vote(cho_name, cho_system_name, cho_vot_id, cho_score, cho_status, cho_path) VALUES(?, ?, ?, 0, 1, ?)";
-        $this->db->query($sql, array($this->cho_name, $this->cho_system_name, $this->cho_vot_id, $this->cho_path));
+        $sql = "INSERT INTO vcs_choice_vote(cho_name, cho_description, cho_vot_id, cho_score, cho_status, cho_path) VALUES(?, ?, ?, 0, 1, ?)";
+        $this->db->query($sql, array($this->cho_name, $this->cho_description, $this->cho_vot_id, $this->cho_path));
     }
 }

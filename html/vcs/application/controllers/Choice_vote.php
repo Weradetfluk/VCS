@@ -24,7 +24,7 @@ class Choice_vote extends VCS_controller
 	{
 		$this->load->model('/M_vcs_choice_vote', 'mcho');
 		$this->mcho->cho_name = $this->input->post('cho_name');
-		$this->mcho->cho_system_name = $this->input->post('cho_system_name');
+		$this->mcho->cho_description = $this->input->post('cho_description');
 		$this->mcho->cho_vot_id = $this->input->post('vot_id');
 
 		$file = $_FILES['cho_path'] ?? '';
@@ -159,7 +159,7 @@ class Choice_vote extends VCS_controller
 		$this->load->model('/M_vcs_choice_vote', 'mcho');
 		$this->mcho->cho_id = $this->input->post('cho_id');
 		$this->mcho->cho_name = $this->input->post('cho_name');
-		$this->mcho->cho_system_name = $this->input->post('cho_system_name');
+		$this->mcho->cho_description = $this->input->post('cho_description');
 		$this->mcho->cho_vot_id = $this->input->post('vot_id');
 
 		$file = $_FILES['cho_path_edit'] ?? '';
