@@ -42,7 +42,7 @@ CREATE TABLE `vcs_vote` (
 CREATE TABLE `vcs_choice_vote` (
   `cho_id` int NOT NULL AUTO_INCREMENT COLLATE utf8_unicode_ci COMMENT 'ไอดีของ choice vote',
   `cho_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT 'ชื่อของ choice vote',
-  `cho_system_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT 'ชื่อระบบของ choice vote',
+  `cho_description` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT 'รายละเอียดของ choice vote',
   `cho_score` int NOT NULL DEFAULT 0 COLLATE utf8_unicode_ci COMMENT 'คะเเนนของ choice vote',
   `cho_path` VARCHAR(150) NOT NULL COLLATE utf8_unicode_ci COMMENT 'รูปของ choice vote',
   `cho_status` int NOT NULL DEFAULT 1 COLLATE utf8_unicode_ci COMMENT 'สถานะของ choice vote 1 = ไม่ถูกลบ, 2 = ถูกลบ',

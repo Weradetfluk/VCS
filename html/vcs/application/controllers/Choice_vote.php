@@ -97,33 +97,26 @@ class Choice_vote extends VCS_controller
 	public function vote_ajax()
 	{
 		$this->load->model('M_vcs_choice_vote', 'mcho');
-		$this->load->model('M_vcs_user', 'musr');
 		$this->load->model('M_vcs_history_vote', 'mhis');
-
-		//  // vcs_choice_vote
-		//  $score_sum = $this->input->post('score_vote') + $this->input->post('cho_score');
-		//  $this->mcho->cho_score = $score_sum;
-		//  $this->mcho->cho_id = $this->input->post('cho_id');
-		//  $this->mcho->update_score_by_cho_id();
-
-		//  // vcs_user
-		//  $point_sum = $this->session->userdata("use_point") - $this->input->post('score_vote');
-		//  $this->session->set_userdata("use_point", $point_sum);
-		//  $this->musr->use_id = $this->session->userdata("use_id");
-		//  $this->musr->use_point = $this->session->userdata("use_point");
-		//  $this->musr->update_point_by_use_id();
 
 		// vcs_history_vote
 		date_default_timezone_set('Asia/Bangkok');
-		$this->mhis->his_use_id = $this->session->userdata("use_id");
-		$this->mhis->his_cho_id = $this->input->post('cho_id');
-		$this->mhis->his_score = $this->input->post('score_vote');
-		$point_sum = $this->session->userdata("use_point") - $this->input->post('score_vote');
-		$this->session->set_userdata("use_point", $point_sum);
-		$this->mhis->his_date_vote = date("Y-m-d H:i:s");
-		$this->mhis->insert_history_vote();
-
-		echo 1;
+		$date_now = date("Y-m-d H:i:s");
+		$check_vote = $this->mcho->check_vote($date_now);
+		if($check_vote){
+			$this->mhis->his_use_id = $this->session->userdata("use_id");
+			$this->mhis->his_cho_id = $this->input->post('cho_id');
+			$this->mhis->his_score = $this->input->post('score_vote');
+			$point_sum = $this->session->userdata("use_point") - $this->input->post('score_vote');
+			$this->session->set_userdata("use_point", $point_sum);
+			$this->mhis->his_date_vote = $date_now;
+			$this->mhis->insert_history_vote();
+	
+			echo 1;
+		}else{
+			echo 2;
+		}
+		
 	}
 
 	/*

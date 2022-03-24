@@ -41,4 +41,28 @@ class M_vcs_choice_vote extends Da_vcs_choice_vote
         $query = $this->db->query($sql, array($this->cho_vot_id));
         return $query->result();
     }
+
+    /*
+    * check_vote()
+    * check vote
+    * @input cho
+    * @output -
+    * @author Suwapat Saowarod 62160340
+    * @Create Date 2565-03-21
+    * @Update Date -
+    */
+    function check_vote($date_now)
+    {
+        $sql = "SELECT * FROM vcs_choice_vote
+                LEFT JOIN vcs_vote
+                ON vcs_vote.vot_id = vcs_choice_vote.cho_vot_id
+        WHERE ('$date_now' between vcs_vote.vot_start_time AND vcs_vote.vot_end_time) AND vcs_vote.vot_status = 2";
+        $query = $this->db->query($sql, array($this->cho_vot_id));
+        $query_row = $query->num_rows();
+        if ($query_row) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
 }

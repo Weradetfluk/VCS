@@ -230,11 +230,11 @@
         let error_add = '<?= $this->session->userdata("add_error_image"); ?>';
         if (error_add == "success") {
             <?= $this->session->unset_userdata("add_error_image"); ?>
-            swal("สำเร็จ", "เพิ่มโหวตสำเร็จ", "success");
+            swal("แจ้งเตือน", "เพิ่มโหวตสำเร็จ", "success");
 
         } else if (error_add == "fail") {
             <?= $this->session->unset_userdata("add_error_image"); ?>
-            swal("ไม่สำเร็จ", "เพิ่มโหวตไม่สำเร็จ", "error");
+            swal("แจ้งเตือน", "เพิ่มโหวตไม่สำเร็จ", "error");
 
         }
         preview_image_add();
@@ -242,11 +242,11 @@
         let error_edit = '<?= $this->session->userdata("edit_error_image"); ?>';
         if (error_edit == "success") {
             <?= $this->session->unset_userdata("edit_error_image"); ?>
-            swal("สำเร็จ", "แก้ไขโหวตสำเร็จ", "success");
+            swal("แจ้งเตือน", "แก้ไขโหวตสำเร็จ", "success");
 
         } else if (error_edit == "fail") {
             <?= $this->session->unset_userdata("edit_error_image"); ?>
-            swal("ไม่สำเร็จ", "แก้ไขโหวตไม่สำเร็จ", "error");
+            swal("แจ้งเตือน", "แก้ไขโหวตไม่สำเร็จ", "error");
         }
         preview_image_edit();
     });
@@ -314,9 +314,16 @@
                 score_vote: score
             },
             success: function(data) {
-                swal("สำเร็จ", "คุณได้ทำการโหวตเสร็จสิ้น", "success").then(function() {
+                if(data == 1){
+                    swal("แจ้งเตือน", "คุณได้ทำการโหวตเสร็จสิ้น", "success").then(function() {
                     location.reload();
-                });
+                    });
+                }else if(data == 2){ 
+                    swal("แจ้งเตือน", "ไม่สามารถโหวตได้ เนื่องจากไม่อยู่ในเวลาดำเนินการ", "error").then(function() {
+                    location.reload();
+                    });
+                }
+                
             },
             error: function() {
                 alert('ajax error working');
@@ -341,7 +348,7 @@
             },
             url: '<?php echo base_url() . 'Choice_vote/delete_choice_vote_ajax/' ?>',
             success: function() {
-                swal("สำเร็จ", "คุณได้ลบตัวเลือกโหวตเสร็จสิ้น", "success").then(function() {
+                swal("แจ้งเตือน", "คุณได้ลบตัวเลือกโหวตเสร็จสิ้น", "success").then(function() {
                     location.reload();
                 });
             },
