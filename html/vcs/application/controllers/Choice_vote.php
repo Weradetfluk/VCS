@@ -144,7 +144,7 @@ class Choice_vote extends VCS_controller
 	}
 
 	/*
-	 * update_choice_vote_ajax
+	 * update_choice_vote
 	 * update choice vote
 	 * @input cho_id,choice_name,choice_system_name
 	 * @output -
@@ -152,15 +152,6 @@ class Choice_vote extends VCS_controller
 	 * @Create Date 2565-03-12
 	 * @Update -
 	 */
-	//  public function update_choice_vote_ajax()
-	//  {
-	// 	 $this->load->model('/M_vcs_choice_vote', 'mvcv');
-	// 	 $this->mvcv->cho_id = $this->input->post('cho_id');
-	// 	 $this->mvcv->cho_name = $this->input->post('choice_name');
-	// 	 $this->mvcv->cho_score = $this->input->post('choice_score');
-	// 	 $this->mvcv->update_choice_vote();
-	//  }
-
 	public function update_choice_vote()
 	{
 
