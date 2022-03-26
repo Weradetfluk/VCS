@@ -31,7 +31,7 @@
                         </p>
                         <div class="row" style="padding: 0px 0px 10px 0px;">
                             <div class="col px-1">
-                                <a href="<?= base_url() . 'Dashboard_score/show_dasbord_score_page/' . $arr_vote['arr_vote'][$i]->vot_id; ?>" class="btn btn-info" style="width: 100%;">เลือก</a>
+                                <a href="<?= base_url() . 'Dashboard_score/show_dasbord_score_page/' . $arr_vote['arr_vote'][$i]->vot_id . '/' . $arr_vote['arr_vote'][$i]->vot_name;?>" class="btn btn-info" style="width: 100%;">เลือก</a>
                             </div>
                         </div>
                     </div>

@@ -71,9 +71,10 @@ class Dashboard_score extends VCS_controller
 	* @author weradet nopsombun 62160110
 	* @Create Date 2565-03-11
 	*/
-	public function show_dasbord_score_page($cho_vot_id)
+	public function show_dasbord_score_page($cho_vot_id, $vot_name)
 	{
 		$data['cho_vot_id'] = $cho_vot_id;
+		$data['vot_name'] = urldecode($vot_name);
 		$this->output("v_show_score", $data);
 	}
 	/*

@@ -4,6 +4,11 @@
     }
 </style>
 <div class="container body">
+    <div class="row mb-3">
+        <div class="col" style="margin-left: 1%; padding-top: 1%;">
+            <a href="<?php echo base_url() . 'Dashboard_score'; ?>"><?= $vot_name?></a> > ดูผลโหวต
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <div id="container"></div>
