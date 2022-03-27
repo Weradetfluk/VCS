@@ -17,7 +17,7 @@
 
     <style>
         .body {
-            margin-top: 7%;
+            margin-top: 50px;
             z-index: 2;
         }
     </style>
