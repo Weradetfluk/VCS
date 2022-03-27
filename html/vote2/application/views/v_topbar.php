@@ -215,9 +215,9 @@
   </div>
   <div class="form-inline" style="margin-right: 15px;">
     <?php if ($this->session->userdata("use_status") == 1) { ?>
-      <span style="background-color: white; color:black; border-radius: 10px; padding: 5px 10px; margin-right: 10px;">คะแนนที่มี <?php echo $this->session->userdata("use_point"); ?></span>
+      <span style="background-color: white; color:black; border-radius: 10px; padding: 5px 10px; margin-right: 10px; margin-left: 15px;">คะแนนที่มี <?php echo $this->session->userdata("use_point"); ?></span>
     <?php } ?>
-    <a class="btn btn-outline-danger" href="<?= base_url() . 'VCS_controller/logout' ?>">Logout</a>
+    <a class="btn btn-outline-danger" style="margin-left: 15px;" href="<?= base_url() . 'VCS_controller/logout' ?>">Logout</a>
   </div>
 </nav>
 
