@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote Camp System</title>
 
+    <!-- icon -->
+    <link rel="icon" href="<?php echo base_url() . 'asset/image_vcs/logo.png' ?>" style="width: 100%;" type="image/png">
     <!-- bootstap 4 -->
     <!-- <link rel="stylesheet" href="<?php echo base_url() . 'asset/bootstrap-4.6.1-dist' ?>/css/bootstrap.min.css" type="text/css"> -->
     <link rel="preload" onload="this.rel = 'stylesheet'" href="<?php echo base_url() . 'asset/bootstrap-4.6.1-dist' ?>/css/bootstrap.min.css" as="style" type="text/css">
