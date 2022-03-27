@@ -28,7 +28,7 @@ $login_fail = $login_fail ?? ''; // เช็คว่ามีตัวแป�
     }
 
     .form {
-        width: 335px !important;   
+        /* width: 300px; */
         padding: 64px 15px 24px;
         margin: 0 auto;
         margin-top: 8%;

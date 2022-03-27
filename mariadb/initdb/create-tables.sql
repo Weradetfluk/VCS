@@ -15,12 +15,17 @@ CREATE TABLE `vcs_user` (
   `use_id` int NOT NULL AUTO_INCREMENT COLLATE utf8_unicode_ci COMMENT 'ไอดีของ User', 
   `use_name` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT ' ชื่อของ User ',
   `use_username` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci COMMENT ' ชื่อผู้ใช้ของ User ',
-  `use_password` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci COMMENT ' รหัสผ่านของ User ',
+  `use_password` VARCHAR(100) NOT NULL COLLATE utf8_unicode_ci COMMENT ' รหัสผ่านของ User ',
   `use_status` int NOT NULL COLLATE utf8_unicode_ci COMMENT ' สถานะของ User เช่น 1 = ผู้ใช้ทั่วไป, 2 = แอดมิน',
   `use_point` int NOT NULL DEFAULT 0 COLLATE utf8_unicode_ci COMMENT ' คะแนนที่ใช้โหวต',
   PRIMARY KEY (`use_id`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- -----------------------------------------------------
+-- Insert data table `vcs_user`
+-- -----------------------------------------------------
+INSERT INTO `vcs_user` (`use_id`, `use_name`, `use_username`, `use_password`, `use_status`, `use_point`)
+VALUES (1, "admin", "admin", "81dc9bdb52d04dc20036dbd8313ed055", 2, 0);
 
 -- -----------------------------------------------------
 -- Table `vcs_vote`
