@@ -23,9 +23,9 @@
 <script src="<?php echo base_url() . 'asset/dist/modules/accessibility.js'?> "></script>
 
 <script>
-    var gold_url = "https://se.buu.ac.th/gami_ossd/assets/dist/img/gold_crown.png"
-    var sliver_url = "https://se.buu.ac.th/gami_ossd/assets/dist/img/sliver_crown.png"
-    var bronze_url = "https://se.buu.ac.th/gami_ossd/assets/dist/img/broezn_crown.png"
+    var gold_url   = "<?php echo base_url() .'asset/image_vcs/gold_crown.png'?>"
+    var sliver_url = "<?php echo base_url() .'asset/image_vcs/sliver_crown.png'?>"
+    var bronze_url = "<?php echo base_url() .'asset/image_vcs/broezn_crown.png'?>"
     var cho_vot_id = <?php echo $cho_vot_id; ?>;
     var gold_formatter = {
         enabled: true,
@@ -57,6 +57,16 @@
         get_data_score_ajax(cho_vot_id)
     });
 
+
+     /*
+     * get_data_score_ajax
+     * -
+     * @input cho_vot_id
+     * @output -
+     * @author  weradet nopsombun 62160110
+     * @Create Date 2565-03-12
+     * @Update -
+     */
     function get_data_score_ajax(cho_vot_id) {
         $.ajax({
             type: 'post',
@@ -77,8 +87,15 @@
             console.log(json_data);
         });
     }
-
-
+      /*
+     * findIndicesOfMax
+     * -
+     * @input inp, count
+     * @output -
+     * @author  weradet nopsombun 62160110
+     * @Create Date 2565-03-12
+     * @Update -
+     */
     function findIndicesOfMax(inp, count) {
         var outp = new Array();
 
@@ -103,8 +120,15 @@
         console.log("outp : " + outp);
         return outp;
     } // End findIndicesOfMax
-
-
+    /*
+     * create_chart_dashborad
+     * -
+     * @input arr_score
+     * @output -
+     * @author  weradet nopsombun 62160110
+     * @Create Date 2565-03-12
+     * @Update -
+     */
     function create_chart_dashborad(arr_score) {
         var obj_data_point = []; // อาเรย์ข้อมูลที่ สร้าง Barchart  ประเภทกิจกรรม
 
