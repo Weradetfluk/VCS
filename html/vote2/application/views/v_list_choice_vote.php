@@ -108,9 +108,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="name_vote"></h5>
+                <h6 style="margin-top: 6px;">คะแนนที่มี <?php echo $this->session->userdata("use_point");?></h6>
             </div>
             <div class="modal-body">
-                <input class="form-control" type="number" id="score_vote" placeholder="กรอกคะแนน">
+                <input class="form-control" type="number" id="score_vote" placeholder="กรอกคะแนน"><br>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">ยกเลิก</button>
