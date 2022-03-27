@@ -197,7 +197,7 @@ $login_fail = $login_fail ?? ''; // เช็คว่ามีตัวแป�
 
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
-        <img src="http://10.80.6.161/vote4/assets/img/logo.png" alt="" width="40"> Vote Camp System
+        <img src="<?php echo base_url().'asset/image_vcs/logo.png'?>" alt="" width="40"> Vote Camp System
     </a>
 </nav>
 
