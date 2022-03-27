@@ -1,4 +1,4 @@
-<<style>
+<style>
     .div-span-image {
     position: relative;
     height: 40px;

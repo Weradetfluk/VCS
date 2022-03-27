@@ -106,7 +106,7 @@ class Choice_vote extends VCS_controller
 	{
 		$this->load->model('M_vcs_choice_vote', 'mcho');
 		$this->load->model('M_vcs_history_vote', 'mhis');
-
+		$this->load->model('M_vcs_user', 'muse');
 		// vcs_history_vote
 		date_default_timezone_set('Asia/Bangkok');
 		$date_now = date("Y-m-d H:i:s");
@@ -115,14 +115,20 @@ class Choice_vote extends VCS_controller
 			$this->mhis->his_use_id = $this->session->userdata("use_id");
 			$this->mhis->his_cho_id = $this->input->post('cho_id');
 			$this->mhis->his_score = $this->input->post('score_vote');
-			$point_sum = $this->session->userdata("use_point") - $this->input->post('score_vote');
-			$this->session->set_userdata("use_point", $point_sum);
 			$this->mhis->his_date_vote = $date_now;
-			$this->mhis->insert_history_vote();
-	
-			echo 1;
+			$this->muse->use_id = $this->session->userdata("use_id");
+			$result = $this->muse->get_by_id();
+			if($result->use_point > $this->input->post('score_vote')){
+				$point_sum = $result->use_point - $this->input->post('score_vote');
+				$this->session->set_userdata("use_point", $point_sum);
+				$this->mhis->insert_history_vote();
+				echo 1;
+			}else{
+				echo 2;
+			}
+			
 		}else{
-			echo 2;
+			echo 3;
 		}
 		
 	}

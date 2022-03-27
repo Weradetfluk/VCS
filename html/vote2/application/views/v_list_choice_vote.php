@@ -317,6 +317,10 @@
                     location.reload();
                     });
                 }else if(data == 2){ 
+                    swal("แจ้งเตือน", "ไม่สามารถโหวตได้ เนื่องจากคะแนนน้อยเกินไป", "error").then(function() {
+                    location.reload();
+                    });
+                }else if(data == 3){ 
                     swal("แจ้งเตือน", "ไม่สามารถโหวตได้ เนื่องจากไม่อยู่ในเวลาดำเนินการ", "error").then(function() {
                     location.reload();
                     });

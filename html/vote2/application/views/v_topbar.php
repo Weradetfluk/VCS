@@ -198,18 +198,20 @@
         <div class="left"></div>
         <div class="right"></div>
       </div>
-      <?php if ($this->session->userdata("page") == 1) { ?>
-        <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() . 'Vote/show_vote_list' ?>">จัดการโหวต</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'User/show_manage_user_page' ?>">จัดการผู้ใช้งาน</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Dashboard_score/show_list_vote_page/' ?>">ดูผลโหวต</a></li>
-      <?php } elseif ($this->session->userdata("page") == 2) { ?>
-        <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Vote/show_vote_list' ?>">จัดการโหวต</a></li>
-        <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() . 'User/show_manage_user_page' ?>">จัดการผู้ใช้งาน</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Dashboard_score/show_list_vote_page/' ?>">ดูผลโหวต</a></li>
-      <?php } elseif ($this->session->userdata("page") == 3) { ?>
-        <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Vote/show_vote_list' ?>">จัดการโหวต</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'User/show_manage_user_page' ?>">จัดการผู้ใช้งาน</a></li>
-        <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() . 'Dashboard_score/show_list_vote_page/' ?>">ดูผลโหวต</a></li>
+      <?php if($this->session->userdata("use_status") == 2){?>
+        <?php if ($this->session->userdata("page") == 1) { ?>
+          <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() . 'Vote/show_vote_list' ?>">จัดการโหวต</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'User/show_manage_user_page' ?>">จัดการผู้ใช้งาน</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Dashboard_score/show_list_vote_page/' ?>">ดูผลโหวต</a></li>
+        <?php } elseif ($this->session->userdata("page") == 2) { ?>
+          <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Vote/show_vote_list' ?>">จัดการโหวต</a></li>
+          <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() . 'User/show_manage_user_page' ?>">จัดการผู้ใช้งาน</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Dashboard_score/show_list_vote_page/' ?>">ดูผลโหวต</a></li>
+        <?php } elseif ($this->session->userdata("page") == 3) { ?>
+          <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'Vote/show_vote_list' ?>">จัดการโหวต</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?php echo base_url() . 'User/show_manage_user_page' ?>">จัดการผู้ใช้งาน</a></li>
+          <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() . 'Dashboard_score/show_list_vote_page/' ?>">ดูผลโหวต</a></li>
+        <?php } ?>
       <?php } ?>
     </ul>
   </div>
