@@ -184,7 +184,13 @@
     }
   }
 </style>
-
+<?php
+if (!$this->session->has_userdata("use_id")) {
+  $path = site_url() . "VCS_controller/show_login_page";
+  header("Location: " . $path);
+  exit();
+}
+?>
 <nav class="navbar navbar-expand-custom navbar-mainbg">
   <a class="navbar-brand navbar-logo" href="<?php echo base_url() . 'Vote/show_vote_list' ?>">
     <img src="<?php echo base_url() . 'asset/image_vcs/logo.png' ?>" alt="" width="40"> Vote Camp System
